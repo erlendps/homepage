@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram height="1240" made_with_version="1.6" name="Default" width="2060">
+    <entity id="0" is_weak="false" name="Project" x="561" y="288">
+        <attributes>
+            <attribute is_hidden="false" is_key="true" name="ID" type=""/>
+            <attribute is_hidden="false" is_key="false" name="title" type=""/>
+            <attribute is_hidden="false" is_key="false" name="description" type=""/>
+            <attribute is_hidden="false" is_key="false" name="link" type=""/>
+        </attributes>
+    </entity>
+    <entity id="1" is_weak="false" name="Technology" x="291" y="296">
+        <attributes>
+            <attribute is_hidden="false" is_key="true" name="ID" type=""/>
+            <attribute is_hidden="false" is_key="false" name="name" type=""/>
+        </attributes>
+    </entity>
+    <entity id="5" is_weak="false" name="Recepie" x="551" y="419">
+        <attributes>
+            <attribute is_hidden="false" is_key="true" name="ID" type=""/>
+            <attribute is_hidden="false" is_key="false" name="name" type=""/>
+        </attributes>
+    </entity>
+    <entity id="6" is_weak="false" name="Ingredient" x="283" y="420">
+        <attributes>
+            <attribute is_hidden="false" is_key="true" name="ID" type=""/>
+            <attribute is_hidden="false" is_key="false" name="name" type=""/>
+        </attributes>
+    </entity>
+    <entity id="7" is_weak="true" name="Step" x="561" y="584">
+        <attributes>
+            <attribute is_hidden="false" is_key="true" name="number" type=""/>
+            <attribute is_hidden="false" is_key="false" name="text" type=""/>
+        </attributes>
+    </entity>
+    <diamond id="2" is_weak="false" name="UsesTech" x="431" y="306">
+        <attributes/>
+    </diamond>
+    <diamond id="8" is_weak="true" name="HasSteps" x="570" y="520">
+        <attributes/>
+    </diamond>
+    <diamond id="11" is_weak="false" name="HasIngredient" x="418" y="432">
+        <attributes>
+            <attribute name="amount" type=""/>
+        </attributes>
+    </diamond>
+    <line cardinality_string="(1,n)" has_u="false" id="3" is_weak="false" role="" style="0" turned="false">
+        <connection connection_side="0" direction="0" object_id="0" relation_point_x="561" relation_point_y="331"/>
+        <connection connection_side="2" direction="0" object_id="2" relation_point_x="463" relation_point_y="322"/>
+    </line>
+    <line cardinality_string="(0,n)" has_u="false" id="4" is_weak="false" role="" style="0" turned="false">
+        <connection connection_side="2" direction="0" object_id="1" relation_point_x="381" relation_point_y="325"/>
+        <connection connection_side="0" direction="0" object_id="2" relation_point_x="431" relation_point_y="322"/>
+    </line>
+    <line cardinality_string="(1,n)" has_u="false" id="9" is_weak="false" role="" style="0" turned="false">
+        <connection connection_side="3" direction="1" object_id="5" relation_point_x="585" relation_point_y="477"/>
+        <connection connection_side="0" direction="0" object_id="8" relation_point_x="570" relation_point_y="536"/>
+    </line>
+    <line cardinality_string="(1,1)" has_u="false" id="10" is_weak="false" role="" style="0" turned="false">
+        <connection connection_side="1" direction="1" object_id="7" relation_point_x="591" relation_point_y="584"/>
+        <connection connection_side="3" direction="1" object_id="8" relation_point_x="586" relation_point_y="552"/>
+    </line>
+    <line cardinality_string="(1,n)" has_u="false" id="12" is_weak="false" role="" style="0" turned="false">
+        <connection connection_side="0" direction="0" object_id="5" relation_point_x="551" relation_point_y="448"/>
+        <connection connection_side="2" direction="0" object_id="11" relation_point_x="450" relation_point_y="448"/>
+    </line>
+    <line cardinality_string="(0,n)" has_u="false" id="13" is_weak="false" role="" style="0" turned="false">
+        <connection connection_side="2" direction="0" object_id="6" relation_point_x="365" relation_point_y="449"/>
+        <connection connection_side="0" direction="0" object_id="11" relation_point_x="418" relation_point_y="448"/>
+    </line>
+</diagram>
