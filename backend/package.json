@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Homepage backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erlendps/homepage.git"
+  },
+  "keywords": [
+    "REST"
+  ],
+  "author": "Erlend Paulsen Skaaden",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/erlendps/homepage/issues"
+  },
+  "homepage": "https://github.com/erlendps/homepage#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "mariadb": "^3.0.0"
+  }
+}
