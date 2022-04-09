@@ -62,3 +62,6 @@ typings/
 
 # database.js
 database.js
+
+# vscode
+.vscode/
