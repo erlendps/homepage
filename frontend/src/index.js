@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import Navbar from './components/navbar'
 import Home from './components/home';
-import Projects from './components/projects';
-import Cookbook from './components/cookbook';
+import Projects from './components/projects/projects';
+import Cookbook from './components/cookbook/cookbook';
 import './css/index.css';
 import Footer from './components/footer';
 
