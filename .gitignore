@@ -65,3 +65,5 @@ database.js
 
 # vscode
 .vscode/
+
+static/
