@@ -6,9 +6,6 @@ body {
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 ul {
@@ -48,4 +45,12 @@ p {
 
 .orange {
   background-color: #C67700;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 100vh;
 }

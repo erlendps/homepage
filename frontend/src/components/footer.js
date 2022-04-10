@@ -7,7 +7,7 @@ class Footer extends React.Component {
     return (
       <footer className="footer">
         <p>Laget med Express/MariaDB og React</p>
-        <p>Copyright © {date.getFullYear} Erlend Paulsen Skaaden. All rights reserved</p>
+        <p>Copyright © {date.getFullYear()} Erlend Paulsen Skaaden. All rights reserved</p>
       </footer>
     );
   }
