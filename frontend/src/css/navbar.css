@@ -9,11 +9,16 @@
   border-right: 0;
 }
 
+.navbar-item {
+  flex: 1 1 0%
+}
+
 .nav-list {
+  flex: 2 1 0%;
   display: flex;
-  gap: 1.5rem;
   justify-content: space-evenly;
-  width: 450px;
+  max-width: 500px;
+  min-width: 400px;
 }
 
 .nav-item {
@@ -35,14 +40,42 @@
   background-color: #2C2A2A;
 }
 
-@media screen and (max-width: 600px) {
+.logos {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  justify-content: center;
+}
+
+.logos img {
+  width: 100%;
+  height: auto;
+  max-width: 32px;
+}
+
+.navbar-item svg {
+  width: 100%;
+  height: auto;
+  max-width: 32px;
+}
+
+.admin {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 500px) {
   .nav-link {
-    font-size: medium;
+    font-size: .9em;
     padding: .4rem;
   }
 
   .nav-list {
     gap: 0;
-    max-width: 250px;
+    min-width: 300px;
+  }
+
+  #github {
+    display: none;
   }
 }

@@ -6,7 +6,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="container">
-        <img className="profile-pic" src={logo} alt="That's me!"></img>
+        <img className="profile-pic" src={logo} alt="That's me!" />
         <p className="intro-text">
           Hei! Mitt navn er Erlend og jeg går 2. året Datateknologi
           på NTNU i Trondheim. Jeg bruker mye av fritiden min på
