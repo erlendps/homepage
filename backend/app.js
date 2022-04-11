@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const logger = require("../logging/logger");
 const db = require("./database/db_functions");
@@ -15,6 +16,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use("/static", express.static("static"));
+
+app.use(cors());
 
 // endpoints
 
