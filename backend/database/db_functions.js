@@ -8,7 +8,7 @@ const getAllProjects = async () => {
   try {
     conn = await db.pool.getConnection();
     const rows = await conn.query(`
-        SELECT image_path, title, description, JSON_ARRAYAGG(name) AS techsUsed, link
+        SELECT projectID, image_path, title, description, JSON_ARRAYAGG(name) AS techsUsed, link
         FROM project
         NATURAL JOIN projectUsesTech
         NATURAL JOIN technology
