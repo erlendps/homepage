@@ -12,12 +12,13 @@ const port = 3001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
 
+// TODO: fix cors config
+app.use(cors());
 app.use("/static", express.static("static"));
 
-app.use(cors());
 
 // endpoints
 
