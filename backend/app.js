@@ -21,12 +21,4 @@ app.use("/static", express.static("static"));
 app.use("/api/projects", projects);
 app.use("/api/cookbook", cookbook);
 
-// index /
-app.get("/", async (req, res) => {
-  logger.log("info", `HTTP ${res.statusCode} ${req.method} ${req.url}`);
-  let rows = await db.getAllTechs();
-  res.status(200).json(rows)
-  // do stuff with rows here
-});
-
 app.listen(port, () => console.log(`Homepage REST API listening on port ${port}`))
