@@ -5,7 +5,7 @@ import logo from '../images/me.jpg';
 class Home extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div className="container home">
         <img className="profile-pic" src={logo} alt="That's me!" />
         <p className="intro-text">
           Hei! Mitt navn er Erlend og jeg går 2. året Datateknologi
