@@ -34,6 +34,7 @@ p {
   border-left: 2px solid #ffffff;
   border-right: 2px solid #ffffff;
   padding-bottom: 2rem;
+  flex-grow: 1;
 }
 
 .white {
