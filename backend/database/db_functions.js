@@ -44,10 +44,15 @@ const newTech = async (technology) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
+    await conn.beginTransaction();
     const res = await conn.query(`INSERT INTO technology (name) VALUES (?)`, [technology.name]);
-    if (res["affectedRows"] === 1) 
+    if (res["affectedRows"] === 1) {
+      await conn.commit();
       return 201;
-    else return 500;
+    } else {
+      await conn.rollback();
+      return 500;
+    }
   } catch (err) {
     logger.log("error", err);
     return 500;
@@ -79,9 +84,11 @@ const newProject = async (project, image) => {
       INSERT INTO projectUsesTech (projectID, techID)
       VALUES ?`, [q]
     );
+    await conn.commit();
     return 201;
   } catch (err) {
     logger.log("error", err);
+    await conn.rollback();
     return 500;
   } finally {
     if (conn) conn.end();
@@ -117,11 +124,34 @@ const getRecepie = async (id) => {
   }
 };
 
+const newRecipe = async (recipeJson) => {
+  let conn;
+  try {
+    conn = await db.pool.getConnection();
+    await conn.beginTransaction();
+    let result = await conn.query("INSERT INTO recipe (recipeJson) VALUES (?)", [recipeJson]);
+    if (result["affectedRows"] === 1) {
+      conn.commit();
+      return 201;
+    } else {
+      conn.rollback();
+      return 500;
+    }
+  } catch (err) {
+    conn.rollback();
+    logger.log("error", err);
+    return 500;
+  } finally {
+    if (conn) conn.end();
+  }
+}
+
 module.exports = {
   getAllProjects,
   newProject,
   getAllRecepies,
   getRecepie,
   getAllTechs,
-  newTech
+  newTech,
+  newRecipe
 };
