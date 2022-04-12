@@ -30,11 +30,13 @@ p {
   margin: 0;
 }
 
-.container {
+.container-main {
   border-left: 2px solid #ffffff;
   border-right: 2px solid #ffffff;
-  padding-bottom: 2rem;
   flex-grow: 1;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
 }
 
 .white {

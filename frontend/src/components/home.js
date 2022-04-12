@@ -5,7 +5,8 @@ import logo from '../images/me.jpg';
 class Home extends React.Component {
   render() {
     return (
-      <div className="container home">
+      <div className="container-main">
+      <div className="home">
         <img className="profile-pic" src={logo} alt="That's me!" />
         <p className="intro-text">
           Hei! Mitt navn er Erlend og jeg går 2. året Datateknologi
@@ -18,6 +19,7 @@ class Home extends React.Component {
           I tillegg liker jeg enkel og god mat, så jeg har også laget en samling
           av mine enkleste og beste oppskrifter!
         </p>
+      </div>
       </div>
     );
   }

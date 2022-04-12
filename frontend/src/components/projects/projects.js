@@ -19,22 +19,24 @@ const Projects = () => {
 
   if (error) {
     return (<div>Error: {error.message}</div>);
+  } else {
+    return (
+      <div className="container-main">
+        <div className="projects">    
+          {projects.map(project => (
+            <ProjectCard 
+              key={project.projectID}
+              title={project.title}
+              desc={project.description}
+              techsUsed={project.techsUsed}
+              github_link={project.link}
+              img_src={project.image_path}
+            />
+          ))}
+        </div> 
+      </div>
+    );
   }
-
-  return (
-    <div className="container">     
-      {projects.map(project => (
-        <ProjectCard 
-          key={project.projectID}
-          title={project.title}
-          desc={project.description}
-          github_link={project.link}
-          img_src={project.image_path}
-        />
-      ))}
-     
-    </div>
-  );
 }
 
 export default Projects;
