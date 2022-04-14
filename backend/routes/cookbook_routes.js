@@ -21,4 +21,23 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
+router.get("/", async (req, res) => {
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/cookbook${req.url}`);
+  const results = await db.getAllRecepies();
+  if (results === 500) {
+    return res.status(500).send("Unsuccess")
+  }
+  res.status(200).json(results);
+});
+
+router.get("/:recipeName", async (req, res) => {
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/cookbook${req.url}`);
+
+  const id = parseInt(req.params["recipeName"]);
+  if (!id) return res.status(404).send("bad URI");
+  const result = await db.getRecepie(id);
+  if (result === 500) return res.status(500).send("Something went wrong.");
+  res.status(200).json(result)
+});
+
 module.exports = router;
