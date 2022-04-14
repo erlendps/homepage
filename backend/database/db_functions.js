@@ -100,7 +100,7 @@ const getAllRecepies = async () => {
   let conn;
   try {
     conn = await db.pool.getConnection();
-    let rows = await conn.query(`SELECT recipeID, json_value(recipeJson, '$.name') AS recipeName FROM recipe`);
+    let rows = await conn.query(`SELECT recipeID, recipeName, img_src FROM recipe`);
     return rows;
   } catch (err) {
     logger.log("error", err);
@@ -110,11 +110,11 @@ const getAllRecepies = async () => {
   }
 };
 
-const getRecepie = async (id) => {
+const getRecepie = async (recipeName) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
-    let rows = await conn.query(`SELECT * FROM recipe WHERE recipeID = ?`, [id]);
+    let rows = await conn.query(`SELECT * FROM recipe WHERE recipeName = ?`, [id]);
     return rows;
   } catch (err) {
     logger.log("error", err);
