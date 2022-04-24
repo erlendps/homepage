@@ -114,7 +114,7 @@ const getRecepie = async (recipeName) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
-    let rows = await conn.query(`SELECT * FROM recipe WHERE recipeName = ?`, [id]);
+    let rows = await conn.query(`SELECT * FROM recipe WHERE recipeName = ?`, [recipeName]);
     return rows;
   } catch (err) {
     logger.log("error", err);
