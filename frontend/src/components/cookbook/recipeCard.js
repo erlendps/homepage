@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import parseToTitle from '../../utils';
 
-// TODO: fix this ugly shit
+
 const RecipeCard = (props) => {
   const [error, setError] = useState(null);
   const [image, setImage] = useState("");

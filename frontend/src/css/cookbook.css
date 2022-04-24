@@ -10,9 +10,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 2px solid #C67700;
+  border-radius: 10px;
+  background-color: #606060;
+  width: 300px;
+  text-align: center;
+  height: 400px;
 }
-
-
 
 .recipe-image {
   width: 100%;
@@ -23,4 +27,19 @@
   overflow: hidden;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  border-bottom: 2px solid #ffffff;
+}
+
+.recipe-card h2 {
+  padding: 1rem 0;
+}
+
+.recipe-card-link {
+  color: #ffffff;
+  max-width: 304px;
+  max-height: 404px;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 4px 8px 0 #C67700, 0 6px 20px 0 #C67700;
 }

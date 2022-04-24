@@ -1,0 +1,26 @@
+.recipe {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  gap: 1rem;
+  align-items: center;
+}
+
+.recipe img {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.steps-and-ingredients {
+  display: flex;
+}
+
+.ingredient {
+  display: flex;
+  gap: 1rem;
+}
