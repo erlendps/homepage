@@ -31,3 +31,10 @@ CREATE TABLE IF NOT EXISTS recipe (
   img_src VARCHAR(250)
   recipeJson JSON CHECK (JSON_VALID(recipeJson))
 );
+
+CREATE TABLE IF NOT EXISTS user (
+  userID INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(100) UNIQUE NOT NULL,
+  passwordHash VARCHAR(400) NOT NULL,
+  admin_access BOOLEAN DEFAULT false
+)
