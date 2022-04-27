@@ -68,9 +68,11 @@ const Recipe = () => {
           <h1>{parseToTitle(recipeName)}</h1>
           <div className="steps-and-ingredients">
             <div className="ingredients">
+              <h2>Ingredienser</h2>
               <Ingredients ingredients={recipe.recipeJson.ingredients} />
             </div>
             <div className="steps">
+              <h2>Fremgangsmåte</h2>
               <Steps steps={recipe.recipeJson.steps} />
             </div>
           </div>

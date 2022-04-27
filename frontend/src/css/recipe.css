@@ -18,9 +18,32 @@
 
 .steps-and-ingredients {
   display: flex;
+  flex-direction: row;
+  width: 80vw;
 }
 
 .ingredient {
   display: flex;
   gap: 1rem;
+  justify-content: space-between;
+}
+
+.steps, .ingredients {
+  padding: 2rem;
+}
+
+.ingredients {
+  border: 2px solid white;
+  width: 30%;
+}
+
+.steps {
+  border: 2px solid white;
+  width: 70%;
+}
+
+@media screen and (max-width: 700px) {
+  .steps-and-ingredients {
+    flex-direction: column;
+  }
 }
