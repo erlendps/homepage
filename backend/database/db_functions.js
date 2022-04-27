@@ -144,7 +144,22 @@ const newRecipe = async (recipeJson) => {
   } finally {
     if (conn) conn.end();
   }
-}
+};
+
+const checkIfAdmin = async (username) => {
+  let conn;
+  try {
+    conn = await db.pool.getConnection();
+    let result = await conn.query(`SELECT admin_access FROM user WHERE username = ?`, [username]);
+    return result;
+  } catch (err) {
+    logger.log("error", err);
+    return 401;
+  } finally {
+    if (conn) conn.end();
+  }
+};
+
 
 module.exports = {
   getAllProjects,
@@ -153,5 +168,6 @@ module.exports = {
   getRecepie,
   getAllTechs,
   newTech,
-  newRecipe
+  newRecipe,
+  checkIfAdmin
 };
