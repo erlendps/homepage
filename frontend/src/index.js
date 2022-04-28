@@ -11,6 +11,7 @@ import Home from './components/home';
 import Projects from './components/projects/projects';
 import Cookbook from './components/cookbook/cookbook';
 import Recipe from './components/cookbook/recipe';
+import Admin from './components/admin/admin';
 import './css/index.css';
 import Footer from './components/footer';
 
@@ -34,6 +35,14 @@ class Landing extends React.Component {
             element={
               <Page title="pauska/hjem">
                 <Home />
+              </Page>
+            }
+          />
+          <Route 
+            path="/admin"
+            element={
+              <Page title="pauska/admin">
+                <Admin />
               </Page>
             }
           />
