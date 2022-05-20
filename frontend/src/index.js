@@ -39,9 +39,9 @@ class Landing extends React.Component {
             }
           />
           <Route 
-            path="/admin"
+            path="/admin/*"
             element={
-              <Page title="pauska/admin">
+              <Page title="pauska/sudo">
                 <Admin />
               </Page>
             }
@@ -77,5 +77,7 @@ class Landing extends React.Component {
     );
   }
 }
+
+export default Page;
 
 ReactDOM.createRoot(document.getElementById("root")).render(<Landing />)
