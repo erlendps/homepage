@@ -53,3 +53,9 @@
   color: inherit;
   text-decoration: underline;
 }
+
+.techBubble {
+  padding: .25rem;
+  border-radius: .5rem;
+  border: 2px solid #C67700;
+}

@@ -20,10 +20,9 @@ const ProjectCard = (props, {childReady}) => {
         <h2>{props.title}</h2>
         <p>{props.desc}</p>
       <div className="project-item">
-      <h3>Teknologier brukt:</h3>
       <ul className="techs">
         {props.techsUsed.map((tech) => (
-          <li key={tech}>{tech}</li>
+          <li key={tech} className="techBubble">{tech}</li>
         ))}
       </ul>
       </div>
