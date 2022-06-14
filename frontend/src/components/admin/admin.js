@@ -9,36 +9,50 @@ import AdminProjects from './admin_projects';
 import AdminRecepies from './admin_recepies';
 import AdminTechs from './admin_techs';
 import '../../css/admin/admin.css';
+import Back from '../general';
+
+const AdminLanding = () => {
+  return (
+    <div className="admin-menu">
+      <h1>Admin site</h1>
+      <div className="container">
+        <div className="admin-menu-item">
+          <Link to="/admin/project" className="admin-menu-option">
+            <strong>Projects</strong> - Edit old projects or add new ones
+          </Link>
+        </div>
+        <div className="admin-menu-item">
+          <Link to="/admin/tech" className="admin-menu-option">
+            <strong>Techs</strong> - Delete or add new technologies
+          </Link>
+        </div>
+        <div className="admin-menu-item">
+          <Link to="/admin/recipe" className="admin-menu-option">
+            <strong>Recepies</strong> - Edit old recepies or add new ones
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const Admin = () => {
   return (
     <div className="container-main">
-      <div className="admin-menu">
-        <h1>Admin site</h1>
-        <div className="container">
-          <div className="admin-menu-item">
-            <Link to="/admin/project" className="admin-menu-option">
-              <strong>Projects</strong> - Edit old projects or add new ones
-            </Link>
-          </div>
-          <div className="admin-menu-item">
-            <Link to="/admin/tech" className="admin-menu-option">
-              <strong>Techs</strong> - Delete or add new technologies
-            </Link>
-          </div>
-          <div className="admin-menu-item">
-            <Link to="/admin/recipe" className="admin-menu-option">
-              <strong>Recepies</strong> - Edit old recepies or add new ones
-            </Link>
-          </div>
-        </div>
-      </div>
-
       <Routes>
+        <Route
+          path=""
+          element={
+            <Page title="pauska/sudo">
+              <AdminLanding />
+            </Page>
+          }
+        />
         <Route
           path="project"
           element={
             <Page title="sudo/projects">
+              <Back to="/admin"/>
               <AdminProjects />
             </Page>
           }
@@ -47,6 +61,7 @@ const Admin = () => {
           path="tech"
           element={
             <Page title="sudo/techs">
+              <Back to="/admin"/>
               <AdminTechs />
             </Page>
           }
@@ -55,6 +70,7 @@ const Admin = () => {
           path="recipe"
           element={
             <Page title="sudo/recepies">
+              <Back to="/admin"/>
               <AdminRecepies />
             </Page>
           }
