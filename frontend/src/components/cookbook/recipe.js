@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import parseToTitle from '../../utils';
 import '../../css/recipe.css';
+import Back from '../general';
 
 
 const Steps = (steps) => {
@@ -123,6 +124,7 @@ const Recipe = () => {
     return (
       <div className="container-main">
         <div className="recipe">
+          <Back to="/cookbook" />
           <img src={img} alt={recipeName} />
           <h1>{parseToTitle(recipeName)}</h1>
           <div className="steps-and-ingredients">
