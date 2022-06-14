@@ -1,24 +1,38 @@
 import React from 'react';
 import {
-  Switch,
   Route,
   Routes,
   Link,
-  useParams,
-  useRouteMatch
 } from "react-router-dom";
 import Page from '../..';
 import AdminProjects from './admin_projects';
 import AdminRecepies from './admin_recepies';
 import AdminTechs from './admin_techs';
+import '../../css/admin/admin.css';
 
 const Admin = () => {
   return (
     <div className="container-main">
-      <h1>Admin site</h1>
-      <Link to="/admin/project">Projects</Link>
-      <Link to="/admin/tech">Techs</Link>
-      <Link to="/admin/recipe">Recepies</Link>
+      <div className="admin-menu">
+        <h1>Admin site</h1>
+        <div className="container">
+          <div className="admin-menu-item">
+            <Link to="/admin/project" className="admin-menu-option">
+              <strong>Projects</strong> - Edit old projects or add new ones
+            </Link>
+          </div>
+          <div className="admin-menu-item">
+            <Link to="/admin/tech" className="admin-menu-option">
+              <strong>Techs</strong> - Delete or add new technologies
+            </Link>
+          </div>
+          <div className="admin-menu-item">
+            <Link to="/admin/recipe" className="admin-menu-option">
+              <strong>Recepies</strong> - Edit old recepies or add new ones
+            </Link>
+          </div>
+        </div>
+      </div>
 
       <Routes>
         <Route

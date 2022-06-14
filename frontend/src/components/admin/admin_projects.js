@@ -22,11 +22,9 @@ const ProjectForm = () => {
   if (!loaded) {
     return (<p>error</p>)
   } else {
-    console.log(allTechs);
     return (
       <ul>
         {allTechs.map(tech => {
-          console.log(tech)
           return (<li key={tech.techID}>{tech.name}</li>)
         })}
       </ul>

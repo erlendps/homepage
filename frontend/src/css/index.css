@@ -70,3 +70,11 @@ p {
 .flex-grow-none {
   flex-grow: 0;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 2rem;
+}
