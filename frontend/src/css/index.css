@@ -78,3 +78,28 @@ p {
   align-items: center;
   gap: 2rem;
 }
+
+.back-button {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  line-height: 20px;
+  color: #ffffff;
+  padding: 1rem;
+  margin: -1rem 0 -3rem 0;
+}
+
+.back-button:hover {
+  border-radius: 1rem;
+  background-color: #ffffff;
+  color: #2C2A2A;
+}
+
+#back-icon {
+  filter: invert(100%) sepia(94%) saturate(24%) hue-rotate(65deg) brightness(106%) contrast(108%);
+}
+
+.back-button:hover #back-icon {
+  filter: none;
+}
