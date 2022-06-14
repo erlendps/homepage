@@ -41,9 +41,7 @@ class Landing extends React.Component {
           <Route 
             path="/admin/*"
             element={
-              <Page title="pauska/sudo">
-                <Admin />
-              </Page>
+              <Admin />
             }
           />
           <Route 
