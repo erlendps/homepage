@@ -99,7 +99,7 @@ const Recipe = () => {
   const [img, setImg] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
-  let recipeUrl = "http://localhost:3001/api/cookbook/" + recipeName;
+  let recipeUrl = process.env.REACT_APP_API_BASE_URL + "cookbook/" + recipeName;
 
   useEffect(() => {
     const fetchData = async () => {

@@ -18,7 +18,7 @@ const Cookbook = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/cookbook")
+    fetch(process.env.REACT_APP_API_BASE_URL + "cookbook")
       .then(res => res.json())
       .then((result) => {
         setCookbook(result);

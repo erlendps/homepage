@@ -11,7 +11,7 @@ const ProjectForm = () => {
   const [allTechs, setAllTechs] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/admin/newproject")
+    fetch(process.env.REACT_APP_API_BASE_URL + "admin/newproject")
       .then(result => result.json())
       .then(result => {
         setAllTechs(result);
