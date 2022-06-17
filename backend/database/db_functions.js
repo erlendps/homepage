@@ -160,6 +160,27 @@ const checkIfAdmin = async (username) => {
   }
 };
 
+const deleteTech = async (techID) => {
+  let conn;
+  try {
+    conn = await db.pool.getConnection();
+    await conn.beginTransaction();
+    let result = await conn.query(`DELETE FROM technology WHERE techID = ?`, [techID]);
+    if (result["affectedRows"] === 1) {
+      conn.commit();
+      return 200;
+    } else {
+      conn.rollback();
+      return 500;
+    }
+  } catch (err) {
+    logger.log("error", err);
+    return 500;
+  } finally {
+    if (conn) conn.end();
+  }
+}
+
 
 module.exports = {
   getAllProjects,
@@ -169,5 +190,6 @@ module.exports = {
   getAllTechs,
   newTech,
   newRecipe,
-  checkIfAdmin
+  checkIfAdmin,
+  deleteTech
 };
