@@ -56,7 +56,7 @@ router.get("/newproject", async (req, res) => {
 });
 
 router.post("/newproject", project_upload.single("project_image"), async (req, res) => {
-  let body = req.body();
+  let body = req.body;
   logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/projects${req.url}`);
   if (!req.file) {
     return res.status(500).send("<h1>500 Internal Server Error</h1><p>Something is wrong on our end, sorry!</p>")
@@ -84,13 +84,25 @@ router.get("/newtech", async (req, res) => {
   res.status(200).json(result);
 });
 
-router.post("/newtech", async (req, res) => {
-  const body = req.body();
+router.post("/newtech", project_upload.none(), async (req, res) => {
+  const body = req.body;
   const result = await db.newTech(body);
   if (result === 201) {
     return res.status(201).send("Technology created successfully")
   }
   return res.status(500).send("<h1>500 Internal Server Error</h1><p>Something is wrong on our end, sorry!</p>");
-})
+});
+
+
+// deletion of data
+router.delete("/tech/delete/:techID", async (req, res) => {
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
+  const techID = parseInt(req.params["techID"]);
+  const result = await db.deleteTech(techID)
+  if (result === 200) {
+    return res.status(200).send("Techs deleted successfully");
+  }
+  return res.status(500).send("Not deleted");
+});
 
 module.exports = router;
