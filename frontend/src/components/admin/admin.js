@@ -52,7 +52,6 @@ const Admin = () => {
           path="project"
           element={
             <Page title="sudo/projects">
-              <Back to="/admin"/>
               <AdminProjects />
             </Page>
           }
@@ -61,7 +60,6 @@ const Admin = () => {
           path="tech"
           element={
             <Page title="sudo/techs">
-              <Back to="/admin"/>
               <AdminTechs />
             </Page>
           }
@@ -70,7 +68,6 @@ const Admin = () => {
           path="recipe"
           element={
             <Page title="sudo/recepies">
-              <Back to="/admin"/>
               <AdminRecepies />
             </Page>
           }
