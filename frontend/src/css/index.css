@@ -103,3 +103,10 @@ p {
 .back-button:hover #back-icon {
   filter: none;
 }
+
+@media screen and (max-width: 950px) {
+  .back-button {
+    margin: -1rem 0 -.5rem 0;
+    align-self: center;
+  }
+}
