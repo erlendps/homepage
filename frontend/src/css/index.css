@@ -110,3 +110,7 @@ p {
     align-self: center;
   }
 }
+
+.delete:hover {
+  cursor: pointer;
+}

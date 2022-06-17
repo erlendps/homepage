@@ -1,0 +1,77 @@
+.admin-techs-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  width: 80%;
+  gap: 1rem;
+}
+
+.admin-techs-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.techs-list {
+  margin-top: 1rem;
+  max-height: 60vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+}
+
+.tech-list-item {
+  color: #2c2a2a;
+  background-color: #ffffff;
+  padding: .5rem 1rem;
+  width: 100%;
+  text-align: center;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  gap: .2rem;
+}
+
+.new-tech-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  align-items: center;
+}
+
+.form-name {
+  color: #2c2a2a;
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+  border: 0;
+  font-family: 'Source Code Pro', monospace;
+  font-size: medium;
+}
+
+.form-submit {
+  width: 50%;
+  padding: .5rem;
+  border-radius: 1rem;
+  border: 0;
+  color:#2c2a2a;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 500;
+  font-size: medium;
+}
+
+.form-submit:hover {
+  background-color: #C67700;
+}
+
+@media screen and (max-width: 700px) {
+  .admin-techs-content {
+    flex-direction: column;
+    align-items: center;
+  }
+}
