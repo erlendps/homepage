@@ -46,7 +46,7 @@ const project_upload = multer({storage: project_storage});
 
 router.get("/newproject", async (req, res) => {
   const result = await db.getAllTechs();
-  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/projects${req.url}`);
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
 
   // check if error
   if (result === 500) {
@@ -57,7 +57,7 @@ router.get("/newproject", async (req, res) => {
 
 router.post("/newproject", project_upload.single("project_image"), async (req, res) => {
   let body = req.body;
-  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/projects${req.url}`);
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
   if (!req.file) {
     return res.status(500).send("<h1>500 Internal Server Error</h1><p>Something is wrong on our end, sorry!</p>")
   }
@@ -76,7 +76,7 @@ router.post("/newproject", project_upload.single("project_image"), async (req, r
 
 router.get("/newtech", async (req, res) => {
   const result = await db.getAllTechs();
-  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/projects${req.url}`);
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
 
   if (result === 500) {
     return res.status(500).send("<h1>500 Internal Server Error</h1><p>Something is wrong on our end, sorry!</p>")
@@ -85,6 +85,7 @@ router.get("/newtech", async (req, res) => {
 });
 
 router.post("/newtech", project_upload.none(), async (req, res) => {
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
   const body = req.body;
   const result = await db.newTech(body);
   if (result === 201) {
