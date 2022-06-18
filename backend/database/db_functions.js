@@ -124,12 +124,12 @@ const getRecepie = async (recipeName) => {
   }
 };
 
-const newRecipe = async (recipeJson) => {
+const newRecipe = async (recipeName, recipeJson) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
     await conn.beginTransaction();
-    let result = await conn.query("INSERT INTO recipe (recipeJson) VALUES (?)", [recipeJson]);
+    let result = await conn.query("INSERT INTO recipe (recipeName, recipeJson) VALUES (?, ?)", [recipeName, recipeJson]);
     if (result["affectedRows"] === 1) {
       conn.commit();
       return 201;
@@ -181,6 +181,27 @@ const deleteTech = async (techID) => {
   }
 }
 
+const deleteRecipe = async (recipeName) => {
+  let conn;
+  try {
+    conn = await db.pool.getConnection();
+    await conn.beginTransaction();
+    let result = await conn.query(`DELETE FROM recipe WHERE recipeName = ?`, [recipeName]);
+    if (result["affectedRows"] === 1) {
+      conn.commit();
+      return 200;
+    } else {
+      conn.rollback();
+      return 500;
+    }
+  } catch (err) {
+    logger.log("error", err);
+    return 500;
+  } finally {
+    if (conn) conn.end();
+  }
+}
+
 
 module.exports = {
   getAllProjects,
@@ -191,5 +212,6 @@ module.exports = {
   newTech,
   newRecipe,
   checkIfAdmin,
-  deleteTech
+  deleteTech,
+  deleteRecipe
 };
