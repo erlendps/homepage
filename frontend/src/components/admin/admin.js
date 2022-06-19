@@ -6,10 +6,9 @@ import {
 } from "react-router-dom";
 import Page from '../..';
 import AdminProjects from './admin_projects';
-import AdminRecepies from './admin_recepies';
+import AdminCookbook from './admin_recepies';
 import AdminTechs from './admin_techs';
 import '../../css/admin/admin.css';
-import Back from '../general';
 
 const AdminLanding = () => {
   return (
@@ -68,7 +67,7 @@ const Admin = () => {
           path="recipe"
           element={
             <Page title="sudo/recepies">
-              <AdminRecepies />
+              <AdminCookbook />
             </Page>
           }
         />
