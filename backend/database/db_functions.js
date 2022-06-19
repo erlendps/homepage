@@ -202,6 +202,27 @@ const deleteRecipe = async (recipeName) => {
   }
 }
 
+const deleteProject = async (projectID) => {
+  let conn;
+  try {
+    conn = await db.pool.getConnection();
+    await conn.beginTransaction();
+    let result = await conn.query(`DELETE FROM project WHERE projectID = ?`, [projectID]);
+    if (result["affectedRows"] === 1) {
+      conn.commit();
+      return 200;
+    } else {
+      conn.rollback();
+      return 500;
+    }
+  } catch (err) {
+    logger.log("error", err);
+    return 500;
+  } finally {
+    if (conn) conn.end();
+  }
+}
+
 
 module.exports = {
   getAllProjects,
@@ -213,5 +234,6 @@ module.exports = {
   newRecipe,
   checkIfAdmin,
   deleteTech,
-  deleteRecipe
+  deleteRecipe,
+  deleteProject
 };
