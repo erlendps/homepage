@@ -117,7 +117,7 @@ router.post("/newtech", project_upload.none(), async (req, res) => {
 router.get("/cookbook", async (req, res) => {
   logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
   const result = await db.getAllRecepies();
-  if (results === 500) {
+  if (result === 500) {
     return res.status(500).send("Unsuccess")
   }
   res.status(200).json(result);
