@@ -99,9 +99,29 @@ router.post("/newtech", project_upload.none(), async (req, res) => {
 router.delete("/tech/delete/:techID", async (req, res) => {
   logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
   const techID = parseInt(req.params["techID"]);
-  const result = await db.deleteTech(techID)
+  const result = await db.deleteTech(techID);
   if (result === 200) {
     return res.status(200).send("Techs deleted successfully");
+  }
+  return res.status(500).send("Not deleted");
+});
+
+router.delete("/cookbook/delete/:recipeName", async (req, res) => {
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
+  const recipeName = req.params["recipeName"];
+  const result = await db.deleteRecipe(recipeName);
+  if (result === 200) {
+    return res.status(200).send("Recipe deleted successfully");
+  }
+  return res.status(500).send("Not deleted");
+});
+
+router.delete("/cookbook/delete/:projectID", async (req, res) => {
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
+  const projectID = parseInt(req.params["projectID"]);
+  const result = await db.deleteProject(projectID)
+  if (result === 200) {
+    return res.status(200).send("Recipe deleted successfully");
   }
   return res.status(500).send("Not deleted");
 });
