@@ -25,3 +25,23 @@
   color: #2c2a2a;
   background-color: #ffffff;
 }
+
+.form-input-text {
+  color: #2c2a2a;
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+  border: 0;
+  font-family: 'Source Code Pro', monospace;
+  font-size: medium;
+}
+
+.form-submit {
+  width: 50%;
+  padding: .5rem;
+  border-radius: 1rem;
+  border: 0;
+  color:#2c2a2a;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 500;
+  font-size: medium;
+}
