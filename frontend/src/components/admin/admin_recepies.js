@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Back, Delete, Success, Popup} from "../general";
-import parseToTitle from "../../utils";
+import {Back, Delete, Success, Popup, FileUploader} from "../general";
+import {parseToTitle, parseToDbName} from "../../utils";
 import "../../css/admin/cookbook.css";
 
 
@@ -47,6 +47,7 @@ const RecipeForm = () => {
   const [currentIngredient, setCurrentIngredient] = useState(initIngredient);
   const [currentStep, setCurrentStep] = useState("");
   const [error, setError] = useState("");
+  const [file, setFile] = useState(null);
 
   const updateIngName = (target) => {
     setCurrentIngredient((current) => {
@@ -117,12 +118,30 @@ const RecipeForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (ingredients.length === 0 || steps.length === 0) {
+      setError("You need to add steps and ingredients!");
+      return;
+    }
+    let recipeJson = {
+      "ingredients": ingredients,
+      "steps": steps
+    };
+
+    const form = new FormData();
+    form.append("recipeName", parseToDbName(name));
+    form.append("recipeJson", JSON.stringify(recipeJson));
+    form.append("recipe_image", file);
+
+    axios.post(process.env.REACT_APP_API_BASE_URL + "admin/cookbook/new_recipe", form, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+      .catch(err => console.log(err));
   }
 
   return (
     <div>
       <h2>Add recipe</h2>
-      <form className="new-recipe-form">
+      <form className="new-recipe-form" onSubmit={handleSubmit}>
         <input 
           type="text"
           value={name} 
@@ -164,7 +183,8 @@ const RecipeForm = () => {
         <textarea value={currentStep} onChange={(e) => setCurrentStep(e.target.value)} className="recipe-textarea"/>
         <AddButton handleClick={handleAddStep} />
 
-        <input type="submit" />
+        <FileUploader onFileSelect={(file) => setFile(file)} />
+        <button type="submit">Submit</button>
         <p>{error}</p>
       </form>
     </div>
