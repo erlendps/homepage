@@ -25,7 +25,7 @@ const cookbook_storage = multer.diskStorage({
     cb(null, "./static/cookbook/");
   }, 
   filename: (req, file, cb) => {
-    let recipeName = req.body["title"].replace(/\s/g, '');
+    let recipeName = req.body["recipeName"].replace(/\s/g, '');
     let filename = recipeName + path.extname(file.originalname);
     cb(null, filename);
   }
