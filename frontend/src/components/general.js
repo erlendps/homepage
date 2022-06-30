@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import "../css/success.css";
@@ -52,4 +52,17 @@ const Success = () => {
   );
 }
 
-export {Back, Delete, Popup, Success};
+const FileUploader = ({onFileSelect}) => {
+  const fileInput = useRef(null)
+  const handleFileInput = (e) => {
+      onFileSelect(e.target.files[0])
+  }
+
+  return (
+      <div className="file-uploader">
+          <input type="file" onChange={handleFileInput} />
+      </div>
+  )
+}
+
+export {Back, Delete, Popup, Success, FileUploader};
