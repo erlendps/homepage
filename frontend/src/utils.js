@@ -15,4 +15,21 @@ const parseToTitle = (title) => {
   return result;
 }
 
-export default parseToTitle;
+const parseToDbName = (name) => {
+  let result = name[0].toLowerCase();
+  let newWord = false;
+  for (let i = 1; i < name.length; i++) {
+    if (newWord) {
+      result += name[i].toLowerCase();
+      newWord = false;
+    } else if (name[i] === " ") {
+      result += "_";
+      newWord = true;
+    } else {
+      result += name[i];
+    }
+  }
+  return result;
+}
+
+export {parseToTitle, parseToDbName};
