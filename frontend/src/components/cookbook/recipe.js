@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-import parseToTitle from '../../utils';
+import {parseToTitle} from '../../utils';
 import '../../css/recipe.css';
 import {Back} from '../general';
 
