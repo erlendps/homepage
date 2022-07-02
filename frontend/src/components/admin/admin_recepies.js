@@ -19,19 +19,24 @@ const AddButton = (props) => {
 
 // Ingredient component
 const Ingredient = (props) => {
+  let extraClass = props.number % 2 === 0 ? "item-left" : "item-right";
+  if (props.number > 1) {
+    extraClass += " pt-p2p5"
+  }
   return (
-    <div className="ingredient-form">
+    <div className={"ingredient-in-recipe " + extraClass}>
       <p>{props.name}</p>
-      <p>{props.amount}</p>
-      <p>{props.unit ? props.unit : ""}</p>
+      <p>{props.amount} {props.unit ? props.unit : ""}</p>
     </div>
   );
 }
 
 // step component
+// TODO: allow for reordering
 const Step = (props) => {
   return (
-    <div className="step-form">
+    <div className="step-in-recipe">
+      <p>{props.number}.</p>
       <p>{props.text}</p>
     </div>
   );
@@ -61,7 +66,6 @@ const RecipeForm = (props) => {
     setCurrentIngredient(initIngredient);
     setCurrentStep("");
     setError("");
-    setFile(null);
   }
 
   // updates the current ingredients name
@@ -162,11 +166,10 @@ const RecipeForm = (props) => {
         cleanup();
       })
       .catch(err => console.log(err));
-    
   }
 
   return (
-    <div>
+    <div className="new-recipe-content">
       <h2>Add recipe</h2>
       <form className="new-recipe-form" onSubmit={handleSubmit}>
         <input 
@@ -174,44 +177,55 @@ const RecipeForm = (props) => {
           value={name} 
           placeholder="Name of the recipe" 
           onChange={(e) => setName(e.target.value)}
-          className="recipe-input"
+          className="form-input w-100"
           required 
         />
-        {ingredients.map((ing, i) => {
-          return (<Ingredient key={i} name={ing.name} amount={ing.amount} unit={ing.unit} />);
-        })}
+        <div className="ingredient-container mt-p5">
+          {ingredients.map((ing, i) => {
+            return (<Ingredient key={i} number={i} name={ing.name} amount={ing.amount} unit={ing.unit} />);
+          })}
+        </div>
         <div className="ingredient-input-group">
           <input 
             type="text"
             value={currentIngredient.name} 
             placeholder="Ingredient name"
             onChange={(e) => updateIngName(e.target.value)}
-            className="recipe-input ing-name"
+            className="form-input"
           />
           <input
             type="number"
             value={currentIngredient.amount}
             onChange={(e) => updateIngAmount(e.target.value)}
-            className="recipe-input ing-amount"
+            className="form-input"
           />
           <input
             type="text"
             value={currentIngredient.unit}
             onChange={(e) => updateIngUnit(e.target.value)}
             placeholder="Unit"
-            className="recipe-input ing-unit"
+            className="form-input"
           />
         </div>
-        <AddButton handleClick={handleAddIngredient} />
-
-        {steps.map((step, i) => {
-          return (<Step key={i} text={step} />)
-        })}
-        <textarea value={currentStep} onChange={(e) => setCurrentStep(e.target.value)} className="recipe-textarea"/>
-        <AddButton handleClick={handleAddStep} />
-
+        <div>
+          <AddButton handleClick={handleAddIngredient} />
+        </div>
+        <div className="steps-container">
+          {steps.map((step, i) => {
+            return (<Step key={i} number={i+1} text={step} />)
+          })}
+        </div>
+        <textarea
+          value={currentStep}
+          onChange={(e) => setCurrentStep(e.target.value)}
+          className="form-input w-100"
+          placeholder="Write a descriptive step"
+          />
+        <div>
+          <AddButton handleClick={handleAddStep} />
+        </div>
         <FileUploader onFileSelect={(file) => setFile(file)} />
-        <button type="submit">Submit</button>
+        <input type="submit" className="form-submit" value="Add" />
         <p className="form-error">{error}</p>
       </form>
     </div>
@@ -221,7 +235,7 @@ const RecipeForm = (props) => {
 // component for all recipies
 const AllRecipies = (props) => {
   return (
-    <div>
+    <div className="all-recipies-content">
       <h2>All recipies</h2>
       <ul className="all-recipies">
         {props.cookbook.map((recipe) => {
@@ -285,7 +299,7 @@ const AdminCookbook = () => {
     return (
       <div className="admin-cookbook-page">
         <Back to="/admin"/>
-        <h1>Admin Cookbook Page</h1>
+        <h1 className="mt--p5">Admin Cookbook Page</h1>
         <div className="admin-cookbook-content">
           <AllRecipies cookbook={cookbook} rerenderAllRecipies={forceStateChange}/>
           <RecipeForm rerenderAllRecipies={forceStateChange} togglePopup={togglePopup}/>
