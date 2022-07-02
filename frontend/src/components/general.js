@@ -60,7 +60,7 @@ const FileUploader = ({onFileSelect}) => {
 
   return (
       <div className="file-uploader">
-          <input type="file" onChange={handleFileInput} />
+          <input type="file" className="form-input file-select" onChange={handleFileInput} />
       </div>
   )
 }
