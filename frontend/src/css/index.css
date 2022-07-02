@@ -10,8 +10,7 @@ body {
 
 input:focus,
 select:focus,
-textarea:focus,
-button:focus {
+textarea:focus {
     outline: none;
     border: 2px solid #C67700;
 }
