@@ -5,6 +5,7 @@ import {parseToTitle, parseToDbName} from "../../utils";
 import "../../css/admin/cookbook.css";
 
 
+// generic add button
 const AddButton = (props) => {
   return (
     <button className="recipe-form-button" onClick={props.handleClick}>
@@ -16,6 +17,7 @@ const AddButton = (props) => {
   )
 }
 
+// Ingredient component
 const Ingredient = (props) => {
   return (
     <div className="ingredient-form">
@@ -26,6 +28,7 @@ const Ingredient = (props) => {
   );
 }
 
+// step component
 const Step = (props) => {
   return (
     <div className="step-form">
@@ -34,8 +37,8 @@ const Step = (props) => {
   );
 }
 
-// :(
-const RecipeForm = () => {
+// :( component for the recipe form
+const RecipeForm = (props) => {
   const initIngredient = {
     "name": "",
     "amount": 0,
@@ -49,6 +52,19 @@ const RecipeForm = () => {
   const [error, setError] = useState("");
   const [file, setFile] = useState(null);
 
+ 
+  // resets all states
+  const cleanup = () => {
+    setName("");
+    setIngredients([]);
+    setSteps([]);
+    setCurrentIngredient(initIngredient);
+    setCurrentStep("");
+    setError("");
+    setFile(null);
+  }
+
+  // updates the current ingredients name
   const updateIngName = (target) => {
     setCurrentIngredient((current) => {
       return {
@@ -58,6 +74,7 @@ const RecipeForm = () => {
     });
   }
 
+  // updates the current ingredients amount
   const updateIngAmount = (target) => {
     if (target >= 0) {
       setCurrentIngredient((current) => {
@@ -66,12 +83,13 @@ const RecipeForm = () => {
           "amount": target,
         }
       });
-      setError("")
+      setError("");
     } else {
-      setError("Can't have a negative amount")
+      setError("Can't have a negative amount");
     }
   }
 
+  // updates the current ingredients unit
   const updateIngUnit = (target) => {
     setCurrentIngredient((current) => {
       return {
@@ -81,6 +99,7 @@ const RecipeForm = () => {
     });
   }
 
+  // validation for adding a ingredient and adds to the list
   const handleAddIngredient = (event) => {
     event.preventDefault();
     if (currentIngredient.name) {
@@ -105,6 +124,7 @@ const RecipeForm = () => {
     }
   }
 
+  // validates the step and adds to the list
   const handleAddStep = (event) => {
     event.preventDefault()
     if (currentStep) {
@@ -116,6 +136,7 @@ const RecipeForm = () => {
     }
   }
 
+  // handles submission of form. Creates the body and file
   const handleSubmit = (event) => {
     event.preventDefault();
     if (ingredients.length === 0 || steps.length === 0) {
@@ -135,7 +156,13 @@ const RecipeForm = () => {
     axios.post(process.env.REACT_APP_API_BASE_URL + "admin/cookbook/new_recipe", form, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
+      .then((res) => {
+        props.togglePopup();
+        props.rerenderAllRecipies();
+        cleanup();
+      })
       .catch(err => console.log(err));
+    
   }
 
   return (
@@ -185,12 +212,13 @@ const RecipeForm = () => {
 
         <FileUploader onFileSelect={(file) => setFile(file)} />
         <button type="submit">Submit</button>
-        <p>{error}</p>
+        <p className="form-error">{error}</p>
       </form>
     </div>
   )
 }
 
+// component for all recipies
 const AllRecipies = (props) => {
   return (
     <div>
@@ -212,7 +240,7 @@ const AllRecipies = (props) => {
   );
 }
 
-
+// main component for page
 const AdminCookbook = () => {
   const [cookbook, setCookbook] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -220,6 +248,7 @@ const AdminCookbook = () => {
   const [reload, setReload] = useState(false);
   const [popup, setPopup] = useState(false);
 
+  // fetches all recipies
   useEffect(() => {
     fetch(process.env.REACT_APP_API_BASE_URL + "admin/cookbook")
       .then(res => res.json())
@@ -233,10 +262,12 @@ const AdminCookbook = () => {
       });
   }, [reload]);
 
+  // forces a state change and rerenders component
   const forceStateChange = () => {
     setReload(true);
   }
 
+  // toggles the popup
   const togglePopup = () => {
     setPopup(!popup);
   }
