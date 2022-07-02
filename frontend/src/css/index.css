@@ -13,6 +13,15 @@ select:focus,
 textarea:focus,
 button:focus {
     outline: none;
+    border: 2px solid #C67700;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: 'Source Code Pro', monospace;
+  border: 2px solid transparent;
 }
 
 ul {
