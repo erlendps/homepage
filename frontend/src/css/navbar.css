@@ -1,0 +1,85 @@
+.navbar {
+  height: 8vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 2px solid white;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.navbar-item {
+  flex: 1 1 0%
+}
+
+.nav-list {
+  flex: 2 1 0%;
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 500px;
+  min-width: 400px;
+}
+
+.nav-item {
+  flex: 1 1 0%;
+  width: 100%;
+  text-align: center;
+}
+
+.nav-link {
+  padding: 1rem;
+  font-size: large;
+  border-radius: 5px;
+  color: #2C2A2A;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  color: #FFFFFF;
+  background-color: #2C2A2A;
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  justify-content: center;
+}
+
+.logos img {
+  width: 100%;
+  height: auto;
+  max-width: 32px;
+}
+
+.navbar-item svg {
+  width: 100%;
+  height: auto;
+  max-width: 32px;
+}
+
+.admin {
+  display: flex;
+  justify-content: center;
+}
+
+#github:hover, #admin-link:hover {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(50deg) brightness(104%) contrast(106%);
+}
+
+@media screen and (max-width: 500px) {
+  .nav-link {
+    font-size: .9em;
+    padding: .4rem;
+  }
+
+  .nav-list {
+    gap: 0;
+    min-width: 300px;
+  }
+
+  #github {
+    display: none;
+  }
+}

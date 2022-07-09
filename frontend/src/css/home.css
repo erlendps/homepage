@@ -1,0 +1,29 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-pic {
+  width: 80%;
+  max-width: 500px;
+  height: auto;
+  border: 2px solid #C67700;
+  border-radius: 10px;
+}
+
+.intro-text {
+  margin: 0;
+  max-width: 500px;
+  width: 80%;
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.25em;
+}
+
+.info-link {
+  color: inherit;
+  text-decoration: underline;
+  font-size: inherit;
+}

@@ -1,0 +1,102 @@
+.recipe {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  gap: 1rem;
+  align-items: center;
+}
+
+.recipe img {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.steps-and-ingredients {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+}
+
+.ingredient {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.steps, .ingredients {
+  padding: 2rem;
+}
+
+.ingredients {
+  border: 2px solid white;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.steps {
+  border: 2px solid white;
+  width: 70%;
+}
+
+#ingredient-header {
+  text-align: center;
+}
+
+.portion-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.portions {
+  width: 86.4px;
+}
+
+#portion-int, #portion-text {
+  text-align: center;
+}
+
+#portion-int {
+  font-weight: 700;
+}
+
+.ingredient-button {
+  border-radius: 50%;
+  padding: 0;
+  border: 0;
+  max-height: 40px;
+  max-width: 40px;
+  background-color: transparent;
+}
+
+.ingredient-button svg {
+  width: 100%;
+  height: auto;
+  max-width: 40px;
+}
+
+.ingredient-button:hover svg {
+  filter: invert(51%) sepia(64%) saturate(4087%) hue-rotate(19deg) brightness(95%) contrast(103%);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+  .steps-and-ingredients {
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 .5em;
+  }
+
+  .steps, .ingredients {
+    width: 100%;
+  }
+}

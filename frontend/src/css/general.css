@@ -1,0 +1,27 @@
+.w-100 {
+  width: 100%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.mt--p5 {
+  margin-top: -.5rem;
+}
+
+.pt-p2p5 {
+  padding-top: .25rem;
+}
+
+.mt-p5 {
+  margin-top: .5rem;
+}
