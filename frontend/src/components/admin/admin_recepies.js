@@ -66,6 +66,7 @@ const RecipeForm = (props) => {
     setCurrentIngredient(initIngredient);
     setCurrentStep("");
     setError("");
+    document.getElementById("file-input").value = null;
   }
 
   // updates the current ingredients name

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import "../css/success.css";
@@ -53,14 +53,19 @@ const Success = () => {
 }
 
 const FileUploader = ({onFileSelect}) => {
-  const fileInput = useRef(null)
   const handleFileInput = (e) => {
-      onFileSelect(e.target.files[0])
+    let file = e.target.files[0];
+    onFileSelect(file);
   }
 
   return (
       <div className="file-uploader">
-          <input type="file" className="form-input file-select" onChange={handleFileInput} />
+          <input
+            id="file-input"
+            type="file"
+            className="form-input file-select"
+            onChange={handleFileInput}
+          />
       </div>
   )
 }
