@@ -52,10 +52,17 @@ const Success = () => {
   );
 }
 
+// TODO: long filenames, file size
 const FileUploader = ({onFileSelect}) => {
+  const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
   const handleFileInput = (e) => {
     let file = e.target.files[0];
-    onFileSelect(file);
+    let path = e.target.value;
+    if (allowedExtensions.exec(path)) {
+      onFileSelect(file);
+    } else {
+      e.target.value = null;
+    }
   }
 
   return (
