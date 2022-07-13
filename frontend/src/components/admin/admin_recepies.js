@@ -7,14 +7,18 @@ import "../../css/admin/cookbook.css";
 
 // Ingredient component
 const Ingredient = (props) => {
-  let extraClass = props.number % 2 === 0 ? "item-left" : "item-right";
-  if (props.number > 1) {
-    extraClass += " pt-p2p5"
+  const deleteInternal = (e) => {
+    props.deleteInternal(e, props.number);
   }
+
+  let extraClass = props.number % 2 === 0 ? "item-left" : "item-right";
   return (
-    <div className={"ingredient-in-recipe " + extraClass}>
+    <div className={"ingredient-in-recipe pt-p2p5 pb-p2p5 " + extraClass} onClick={deleteInternal}>
       <p>{props.name}</p>
       <p>{props.amount} {props.unit ? props.unit : ""}</p>
+      {/*
+      <DeleteInternal deleteInternal={props.deleteInternal} element={props.number} />
+      */}
     </div>
   );
 }
@@ -117,9 +121,9 @@ const RecipeForm = (props) => {
     }
   }
 
-  const handleDeleteIngredient = (event) => {
+  const handleDeleteIngredient = (event, index) => {
     event.preventDefault();
-    
+    setIngredients(ingredients.filter((_, i) => {return i !== index}));
   }
 
   // validates the step and adds to the list
@@ -176,7 +180,7 @@ const RecipeForm = (props) => {
         />
         <div className="ingredient-container mt-p5">
           {ingredients.map((ing, i) => {
-            return (<Ingredient key={i} number={i} name={ing.name} amount={ing.amount} unit={ing.unit} />);
+            return (<Ingredient key={i} number={i} name={ing.name} amount={ing.amount} unit={ing.unit} deleteInternal={handleDeleteIngredient} />);
           })}
         </div>
         <div className="ingredient-input-group">

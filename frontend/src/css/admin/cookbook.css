@@ -84,11 +84,11 @@
 
 .item-left {
   border-right: 2px solid #ffffff;
-  padding-right: .5rem;
+  padding: 0 .5rem;
 }
 
 .item-right {
-  padding-left: .5rem;
+  padding: 0 .5rem
 }
 
 .ingredient-container {
@@ -101,7 +101,23 @@
   width: 50%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
+}
+
+.ingredient-in-recipe:hover {
+  background-color: #cc0000;
+  cursor: pointer;
+}
+
+.ingredient-in-recipe.item-left:hover {
+  border-top-left-radius: .5rem;
+  border-bottom-left-radius: .5rem;
+}
+
+.ingredient-in-recipe.item-right:hover {
+  border-top-right-radius: .5rem;
+  border-bottom-right-radius: .5rem;
 }
 
 @media screen and (max-width: 725px) {
