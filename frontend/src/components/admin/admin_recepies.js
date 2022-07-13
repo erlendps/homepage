@@ -1,21 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Back, Delete, Success, Popup, FileUploader} from "../general";
+import {Back, Delete, DeleteInternal, AddButton, Success, Popup, FileUploader} from "../general";
 import {parseToTitle, parseToDbName} from "../../utils";
 import "../../css/admin/cookbook.css";
 
-
-// generic add button
-const AddButton = (props) => {
-  return (
-    <button className="recipe-form-button" onClick={props.handleClick}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" color="#ffffff" className="bi bi-plus-circle" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-      </svg>
-    </button>
-  )
-}
 
 // Ingredient component
 const Ingredient = (props) => {
@@ -127,6 +115,11 @@ const RecipeForm = (props) => {
     } else {
       setError("Ingredient must have a name!")
     }
+  }
+
+  const handleDeleteIngredient = (event) => {
+    event.preventDefault();
+    
   }
 
   // validates the step and adds to the list

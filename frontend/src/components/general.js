@@ -29,6 +29,14 @@ const Delete = (props) => {
   )
 }
 
+const DeleteInternal = ({deleteInternal}) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-x-lg delete" viewBox="0 0 16 16" color="#cc0000" onClick={deleteInternal}>
+      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+    </svg>
+  );
+}
+
 const Popup = (props) => {
   return (
     <div className="popup-box" onClick={props.onClick}>
@@ -77,4 +85,16 @@ const FileUploader = ({onFileSelect}) => {
   )
 }
 
-export {Back, Delete, Popup, Success, FileUploader};
+// generic add button
+const AddButton = (props) => {
+  return (
+    <button className="form-add-button" onClick={props.handleClick}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" color="#ffffff" className="bi bi-plus-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+      </svg>
+    </button>
+  )
+}
+
+export {Back, Delete, DeleteInternal, Popup, Success, FileUploader, AddButton};

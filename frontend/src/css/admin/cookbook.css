@@ -56,18 +56,6 @@
   width: 100%;
 }
 
-.recipe-form-button {
-  background-color: transparent;
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.recipe-form-button:hover {
-  filter: invert(51%) sepia(64%) saturate(4087%) hue-rotate(19deg) brightness(95%) contrast(103%);
-  cursor: pointer;
-}
-
 .new-recipe-content,
 .all-recipies-content {
   display: flex;

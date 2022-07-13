@@ -56,3 +56,15 @@
   font-size: medium;
   cursor: pointer;
 }
+
+.form-add-button {
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.form-add-button:hover {
+  filter: invert(51%) sepia(64%) saturate(4087%) hue-rotate(19deg) brightness(95%) contrast(103%);
+  cursor: pointer;
+}
