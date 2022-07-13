@@ -16,9 +16,6 @@ const Ingredient = (props) => {
     <div className={"ingredient-in-recipe pt-p2p5 pb-p2p5 " + extraClass} onClick={deleteInternal}>
       <p>{props.name}</p>
       <p>{props.amount} {props.unit ? props.unit : ""}</p>
-      {/*
-      <DeleteInternal deleteInternal={props.deleteInternal} element={props.number} />
-      */}
     </div>
   );
 }
@@ -28,8 +25,11 @@ const Ingredient = (props) => {
 const Step = (props) => {
   return (
     <div className="step-in-recipe">
-      <p>{props.number}.</p>
-      <p>{props.text}</p>
+      <div className="step-container">
+        <p>{props.number}.</p>
+        <p>{props.text}</p>
+      </div>
+      <DeleteInternal deleteInternal={props.deleteInternal} element={props.number - 1} />
     </div>
   );
 }
@@ -138,6 +138,11 @@ const RecipeForm = (props) => {
     }
   }
 
+  const handleDeleteStep = (event, index) => {
+    event.preventDefault();
+    setSteps(steps.filter((_, i) => {return i !== index}));
+  }
+
   // handles submission of form. Creates the body and file
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -210,7 +215,7 @@ const RecipeForm = (props) => {
         </div>
         <div className="steps-container">
           {steps.map((step, i) => {
-            return (<Step key={i} number={i+1} text={step} />)
+            return (<Step key={i} number={i+1} text={step} deleteInternal={handleDeleteStep} />)
           })}
         </div>
         <textarea

@@ -68,3 +68,7 @@
   filter: invert(51%) sepia(64%) saturate(4087%) hue-rotate(19deg) brightness(95%) contrast(103%);
   cursor: pointer;
 }
+
+.delete {
+  flex-shrink: 0;
+}

@@ -79,6 +79,14 @@
 
 .step-in-recipe {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 .5rem;
+  gap: .5rem;
+}
+
+.step-container {
+  display: flex;
   gap: .5rem;
 }
 
