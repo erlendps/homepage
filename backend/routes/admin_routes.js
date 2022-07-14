@@ -79,7 +79,7 @@ router.post("/newproject", project_upload.single("project_image"), async (req, r
   if (result === 201) {
     return res.status(201).send("Sucessfully created project");
   }
-  return res.status(500).send("<h1>500 Internal Server Error</h1><p>Something is wrong on our end, sorry!</p>")
+  return res.status(500).send("500 Internal Server Error")
 });
 
 /**********************/
