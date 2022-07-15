@@ -52,6 +52,17 @@ const project_upload = multer({storage: project_storage});
 // project routes
 
 /**********************/
+router.get("/projects", async (req, res) => {
+  const result = await db.getAllProjectsShort();
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
+
+  // check if error
+  if (result === 500) {
+    return res.status(500).send("<h1>500 Internal Server Error</h1><p>Something is wrong on our end, sorry!</p>")
+  }
+  res.status(200).json(result);
+});
+
 router.get("/newproject", async (req, res) => {
   const result = await db.getAllTechs();
   logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);

@@ -22,6 +22,23 @@ const getAllProjects = async () => {
   }
 };
 
+// returns all projects (short version)
+const getAllProjectsShort = async () => {
+  let conn;
+  try {
+    conn = await db.pool.getConnection();
+    const rows = await conn.query(`
+        SELECT projectID, image_path, title
+        FROM project`);
+    return rows;
+  } catch (err) {
+    logger.log("error", err);
+    return 500;
+  } finally {
+    if (conn) conn.end();
+  }
+};
+
 // returns all technologies
 const getAllTechs = async () => {
   let conn;
@@ -77,9 +94,10 @@ const newProject = async (project, image) => {
     const projectID = res["projectID"];
     let q = "";
     project.techsUsed.forEach(tech => {
-      q += `(${projectID}, ${tech.techID})`
+      q += `(${projectID}, ${tech.techID}), `
     });
-    q = q.slice(0, -1);
+    // remove last comma
+    q = q.slice(0, -2);
     res = await conn.query(`
       INSERT INTO projectUsesTech (projectID, techID)
       VALUES ?`, [q]
@@ -235,5 +253,6 @@ module.exports = {
   checkIfAdmin,
   deleteTech,
   deleteRecipe,
-  deleteProject
+  deleteProject,
+  getAllProjectsShort
 };
