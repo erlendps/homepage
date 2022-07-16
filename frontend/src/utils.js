@@ -32,4 +32,8 @@ const parseToDbName = (name) => {
   return result;
 }
 
-export {parseToTitle, parseToDbName};
+const checkStringIsIncluded = (query, target) => {
+  return target.toLowerCase().includes(query.toLowerCase());
+}
+
+export {parseToTitle, parseToDbName, checkStringIsIncluded};
