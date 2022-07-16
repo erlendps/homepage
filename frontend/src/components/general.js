@@ -102,20 +102,9 @@ const AddButton = (props) => {
 }
 
 // search bar
-const SearchBar = ({resultContainer, handleChange}) => {
-  
-  const handleFocus = () => {
-    const classList = document.getElementById(resultContainer).classList;
-    classList.remove("hidden");
-  }
-
-  const handleBlur = () => {
-    const classList = document.getElementById(resultContainer).classList;
-    classList.add("hidden");
-  }
-
+const SearchBar = ({handleChange}) => {
   return (
-    <input type="text" className="search-bar" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+    <input type="text" id="search-bar" className="search-bar" onChange={handleChange} />
   )
 }
 

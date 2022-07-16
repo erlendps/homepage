@@ -1,0 +1,64 @@
+.admin-projects-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  gap: 1rem;
+}
+
+.admin-projects-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.all-projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  overflow-y: scroll;
+  width: 200px;
+  max-height: 60vh;
+  padding-right: .5rem;
+}
+
+.single-project {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #ffffff;
+  border-radius: 1rem;
+  padding: .5rem 0;
+  gap: .25rem;
+}
+
+.single-project img {
+  width: 80%;
+  max-width: 100px;
+  height: auto;
+  min-width: 60px;
+  border: 2px solid #C67700;
+  border-radius: 10px;
+}
+
+.project-content {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 725px) {
+  .admin-projects-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .all-recipies-content {
+    align-items: center;
+  }
+
+  .project-form-content,
+  .all-projects-content {
+    width: 100%;
+  }
+}
