@@ -45,7 +45,7 @@ const getAllTechs = async () => {
   try {
     conn = await db.pool.getConnection();
     const rows = await conn.query(
-      `SELECT * FROM technology`
+      `SELECT * FROM technology ORDER BY name ASC`
     );
     return rows;
   } catch (err) {
