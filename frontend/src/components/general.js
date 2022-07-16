@@ -101,4 +101,22 @@ const AddButton = (props) => {
   )
 }
 
-export {Back, Delete, DeleteInternal, Popup, Success, FileUploader, AddButton};
+// search bar
+const SearchBar = ({resultContainer, handleChange}) => {
+  
+  const handleFocus = () => {
+    const classList = document.getElementById(resultContainer).classList;
+    classList.remove("hidden");
+  }
+
+  const handleBlur = () => {
+    const classList = document.getElementById(resultContainer).classList;
+    classList.add("hidden");
+  }
+
+  return (
+    <input type="text" className="search-bar" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+  )
+}
+
+export {Back, Delete, DeleteInternal, Popup, Success, FileUploader, AddButton, SearchBar};

@@ -29,3 +29,7 @@
 .mt-p5 {
   margin-top: .5rem;
 }
+
+.hidden {
+  display: none;
+}
