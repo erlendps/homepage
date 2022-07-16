@@ -91,17 +91,13 @@ const newProject = async (project, image) => {
       RETURNING projectID
       `, [project.title, project.description, project.link, image]
     );
-    const projectID = res["projectID"];
-    let q = "";
-    project.techsUsed.forEach(tech => {
-      q += `(${projectID}, ${tech.techID}), `
-    });
-    // remove last comma
-    q = q.slice(0, -2);
-    res = await conn.query(`
+    const projectID = res[0]["projectID"];
+    project.techsUsed.forEach(async tech => {
+      res = await conn.query(`
       INSERT INTO projectUsesTech (projectID, techID)
-      VALUES ?`, [q]
-    );
+      VALUES (?, ?)`, [projectID, tech]
+      );
+    });
     await conn.commit();
     return 201;
   } catch (err) {
