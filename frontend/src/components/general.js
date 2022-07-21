@@ -104,7 +104,7 @@ const AddButton = (props) => {
 // search bar
 const SearchBar = ({handleChange}) => {
   return (
-    <input type="text" id="search-bar" className="search-bar" onChange={handleChange} />
+    <input type="text" id="search-bar" className="search-bar form-input w-100" placeholder="Search..." onChange={handleChange} />
   )
 }
 

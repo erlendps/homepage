@@ -47,6 +47,39 @@
   align-items: center;
 }
 
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  max-width: 310px;
+}
+
+.available-techs,
+.selected-techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  justify-content: space-between;
+}
+
+.available-techs {
+  margin-top: .5rem;
+}
+
+.single-tech {
+  padding: .5rem 1rem;
+  border: 2px solid #C67700;
+  border-radius: 1rem;
+  width: 100px;
+  margin-bottom: .5rem;
+}
+
+.single-tech:hover {
+  cursor: pointer;
+  background-color: #C67700;
+}
+
 @media screen and (max-width: 725px) {
   .admin-projects-content {
     flex-direction: column;

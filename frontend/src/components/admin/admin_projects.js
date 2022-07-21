@@ -114,55 +114,55 @@ const ProjectForm = (props) => {
     <div className="project-form-content">
       <h2>Add new project</h2>
       <form className="project-form" onSubmit={handleSubmit}>
-      <input 
-        type="text"
-        value={title} 
-        placeholder="Project title" 
-        onChange={(e) => setTitle(e.target.value)}
-        className="form-input w-100"
-        required 
-      />
-      <div className="techs-group">
-        <div className="selected-techs">
-          {techsUsed.map((tech) => {
-            return (<Tech key={tech.techID} techName={tech.name} id={tech.techID} handleClick={handleDeleteTech} />)
-          })}
-        </div>
-        <div className="tech-input" tabIndex="0" onFocus={handleFocus} onBlur={handleBlur}>
-          <SearchBar resultContainer={"available-techs"} handleChange={(event) => setQuery(event.target.value)} />
-          <div id="available-techs" className="available-techs hidden" >
-            {
-              props.techs.filter((tech) => {
-                if (query === "" || checkStringIsIncluded(query, tech.name)) {
-                  return true;
-                }
-                return false;
-              }).map((tech) => {
-                return (
-                  <Tech key={tech.techID} techName={tech.name} id={tech.techID} handleClick={handleAddTech} />
-                );
-              })
-            }
+        <input 
+          type="text"
+          value={title} 
+          placeholder="Project title" 
+          onChange={(e) => setTitle(e.target.value)}
+          className="form-input w-100"
+          required 
+        />
+        <div className="techs-group w-100">
+          <div className="selected-techs">
+            {techsUsed.map((tech) => {
+              return (<Tech key={tech.techID} techName={tech.name} id={tech.techID} handleClick={handleDeleteTech} />)
+            })}
+          </div>
+          <div className="tech-input" tabIndex="0" onFocus={handleFocus} onBlur={handleBlur}>
+            <SearchBar resultContainer={"available-techs"} handleChange={(event) => setQuery(event.target.value)} />
+            <div id="available-techs" className="available-techs hidden" >
+              {
+                props.techs.filter((tech) => {
+                  if (query === "" || checkStringIsIncluded(query, tech.name)) {
+                    return true;
+                  }
+                  return false;
+                }).map((tech) => {
+                  return (
+                    <Tech key={tech.techID} techName={tech.name} id={tech.techID} handleClick={handleAddTech} />
+                  );
+                })
+              }
+            </div>
           </div>
         </div>
-      </div>
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className="form-input w-100"
-        placeholder="Write a description"
-      />
-      <input 
-        type="text"
-        value={link} 
-        placeholder="Git link" 
-        onChange={(e) => setLink(e.target.value)}
-        className="form-input w-100"
-        required 
-      />
-      <FileUploader onFileSelect={(file) => setImage(file)} />
-      <input type="submit" className="form-submit" value="Add" />
-      <p className="form-error">{formError}</p>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="form-input w-100"
+          placeholder="Write a description"
+        />
+        <input 
+          type="text"
+          value={link} 
+          placeholder="Git link" 
+          onChange={(e) => setLink(e.target.value)}
+          className="form-input w-100"
+          required 
+        />
+        <FileUploader onFileSelect={(file) => setImage(file)} />
+        <input type="submit" className="form-submit" value="Add" />
+        <p className="form-error">{formError}</p>
       </form>
     </div>
   )
