@@ -15,6 +15,8 @@ import Admin from './components/admin/admin';
 import './css/index.css';
 import './css/general.css';
 import Footer from './components/footer';
+import Login from "./components/login";
+import ProtectedRoutes from "./components/ProtectedRoutes"
 
 const Page = (props) => {
   let { recipeName } = useParams();
@@ -39,10 +41,14 @@ class Landing extends React.Component {
               </Page>
             }
           />
-          <Route 
-            path="/admin/*"
+          <Route
+            path="/admin/login"
             element={
-              <Admin />
+              <Login />
+            }
+          />
+          <Route path="/admin/*" element={
+            <ProtectedRoutes />
             }
           />
           <Route 

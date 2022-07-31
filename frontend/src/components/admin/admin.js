@@ -9,6 +9,9 @@ import AdminProjects from './admin_projects';
 import AdminCookbook from './admin_recepies';
 import AdminTechs from './admin_techs';
 import '../../css/admin/admin.css';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const AdminLanding = () => {
   return (
@@ -30,6 +33,11 @@ const AdminLanding = () => {
             <strong>Recepies</strong> - Edit old recepies or add new ones
           </Link>
         </div>
+        <button
+          className="form-input"
+          onClick={() => {cookies.remove("TOKEN"); window.location.href = "/"}}>
+          Logg ut
+        </button>
       </div>
     </div>
   );
