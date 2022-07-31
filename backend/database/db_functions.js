@@ -182,8 +182,8 @@ const checkIfUserExists = async (username) => {
       `
       SELECT EXISTS(
         SELECT username FROM user WHERE username = ?
-      )`, [username]);
-    return !!parseInt(result);
+      ) AS exist`, [username]);
+    return !!result[0]["exist"];
   } catch (err) {
     logger.log("error", err);
     return 401;
@@ -201,6 +201,20 @@ const createNewUser = async (username, password) => {
   } catch (err) {
     logger.log("error", err);
     return 401;
+  } finally {
+    if (conn) conn.end();
+  }
+}
+
+const getHashedPassword = async (username) => {
+  let conn;
+  try {
+    conn = await db.pool.getConnection();
+    let result = await conn.query(`SELECT password FROM user WHERE username = ?`, [username]);
+    return result[0].password;
+  } catch (err) {
+    logger.log("error", err);
+    return 404;
   } finally {
     if (conn) conn.end();
   }
@@ -285,4 +299,5 @@ module.exports = {
   getAllProjectsShort,
   checkIfUserExists,
   createNewUser,
+  getHashedPassword,
 };
