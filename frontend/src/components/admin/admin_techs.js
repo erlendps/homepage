@@ -3,8 +3,11 @@ import "../../css/admin/techs.css";
 import "../../css/popup.css";
 import {Back, Delete, Popup, Success} from "../general";
 import axios from "axios";
+import Cookies from "universal-cookie";
 
+const cookies = new Cookies();
 
+// change to FC
 class TechForm extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +26,10 @@ class TechForm extends React.Component {
     const form = new FormData();
     form.append("name", this.state.value);
     axios.post(process.env.REACT_APP_API_BASE_URL + "admin/newtech", form, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        "Authorization": `Bearer ${cookies.get("TOKEN")}`
+      },
     })
       .then(() => {
         this.props.forceRerenderOfAllTechs();
@@ -70,8 +76,10 @@ const AdminTechs = () => {
   const [reload, setReload] = useState(false);
   const [popup, setPopup] = useState(false);
 
+  const token = cookies.get("TOKEN");
+
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_BASE_URL + "admin/newtech")
+    fetch(process.env.REACT_APP_API_BASE_URL + "admin/newtech", {headers: {"Authorization": `Bearer ${token}`}})
       .then(res => res.json())
       .then((json) => {
         setTechs(json);

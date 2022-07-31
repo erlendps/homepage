@@ -3,6 +3,9 @@ import axios from "axios";
 import {Back, Delete, DeleteInternal, AddButton, Success, Popup, FileUploader} from "../general";
 import {parseToTitle, parseToDbName} from "../../utils";
 import "../../css/admin/cookbook.css";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 
 // Ingredient component
@@ -159,9 +162,11 @@ const RecipeForm = (props) => {
     form.append("recipeName", parseToDbName(name));
     form.append("recipeJson", JSON.stringify(recipeJson));
     form.append("recipe_image", file);
-
     axios.post(process.env.REACT_APP_API_BASE_URL + "admin/cookbook/new_recipe", form, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: {
+        "Content-Type": 'multipart/form-data',
+        "Authorization": `Bearer ${cookies.get("TOKEN")}`
+      },
     })
       .then((res) => {
         props.togglePopup();
@@ -267,7 +272,11 @@ const AdminCookbook = () => {
 
   // fetches all recipies
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_BASE_URL + "admin/cookbook")
+    fetch(process.env.REACT_APP_API_BASE_URL + "admin/cookbook",
+      {headers: {
+        Authorization: `Bearer ${cookies.get("TOKEN")}`
+        }
+      })
       .then(res => res.json())
       .then((json) => {
         setCookbook(json);

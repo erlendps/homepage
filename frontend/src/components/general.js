@@ -2,6 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import "../css/success.css";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 
 const Back = (props) => {
@@ -18,7 +21,7 @@ const Back = (props) => {
 const Delete = (props) => {
   const onClick = () => {
     let uri = `admin/${props.section}/delete/${props.id}`;
-    axios.delete(process.env.REACT_APP_API_BASE_URL + uri);
+    axios.delete(process.env.REACT_APP_API_BASE_URL + uri, {headers: {"Authorization": `Bearer ${cookies.get("TOKEN")}`}});
     props.notifyParent();
   }
 

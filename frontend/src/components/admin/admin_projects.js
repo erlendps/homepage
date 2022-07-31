@@ -3,6 +3,9 @@ import { Back, Popup, Success, Delete, FileUploader, SearchBar } from "../genera
 import "../../css/admin/projects.css";
 import { checkStringIsIncluded } from "../../utils"
 import axios from "axios";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 const Tech = (props) => {
   
@@ -100,7 +103,10 @@ const ProjectForm = (props) => {
     form.append("project_image", image);
 
     axios.post(process.env.REACT_APP_API_BASE_URL + "admin/newproject", form, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": `Bearer ${cookies.get("TOKEN")}`
+      },
     })
       .then((res) => {
         props.togglePopup();
@@ -199,7 +205,8 @@ const AdminProjects = () => {
   useEffect(() => {
     const fetchTechs = async () => {
       try {
-        let result = await fetch(process.env.REACT_APP_API_BASE_URL + "admin/newproject");
+        let result = await fetch(process.env.REACT_APP_API_BASE_URL + "admin/newproject",
+          {headers: {"Authorization": `Bearer ${cookies.get("TOKEN")}`}});
         result = await result.json();
         setAvailableTechs(result);
       } catch (error) {
@@ -209,7 +216,8 @@ const AdminProjects = () => {
     
     const fetchProjects = async () => {
       try {
-        let result = await fetch(process.env.REACT_APP_API_BASE_URL + "admin/projects");
+        let result = await fetch(process.env.REACT_APP_API_BASE_URL + "admin/projects",
+          {headers: {"Authorization": `Bearer ${cookies.get("TOKEN")}`}});
         result = await result.json();
         setAllProjects(result);
       } catch (error) {
