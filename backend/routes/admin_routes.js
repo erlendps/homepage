@@ -3,18 +3,12 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const bcrypt = require("bcrypt");
+const auth = require("../auth")
 
 const logger = require("../../logging/logger");
 const db = require("../database/db_functions");
 
-const isAdmin = async (req, res, next) => {
-  let isAdmin = await db.checkIfAdmin(req.username);
-  if (isAdmin) {
-    next();
-  } else {
-    res.send("redirect");
-  }
-}
+router.use(auth)
 
 /**********************/
 
@@ -53,18 +47,19 @@ const project_upload = multer({storage: project_storage});
 
 /**********************/
 router.post("/newuser", async (req, res) => {
+  logger.log("info", `HTTP ${res.statusCode} ${req.method} /api/admin${req.url}`);
   const username = req.body["username"];
-  if (db.checkIfUserExists(username)) {
-    return res.status(405)
+  if (await db.checkIfUserExists(username)) {
+    return res.status(405).send("User already exists.")
   }
-  bcrypt.hash(res.body.password, 10)
+  bcrypt.hash(req.body.password, 10)
     .then((hashedPassword) => {
       db.createNewUser(username, hashedPassword)
         .then((created) => {
-          res.status(201).send("User created")
+          return res.status(201).send("User created")
         })
         .catch((e) => {
-          res.status(500).send("User not created")
+          return res.status(500).send("User not created")
         })
     })
     .catch((e) => {
