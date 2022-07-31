@@ -76,10 +76,9 @@ const AdminTechs = () => {
   const [reload, setReload] = useState(false);
   const [popup, setPopup] = useState(false);
 
-  const token = cookies.get("TOKEN");
-
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_BASE_URL + "admin/newtech", {headers: {"Authorization": `Bearer ${token}`}})
+    fetch(process.env.REACT_APP_API_BASE_URL + "admin/newtech",
+    {headers: {"Authorization": `Bearer ${cookies.get("TOKEN")}`}})
       .then(res => res.json())
       .then((json) => {
         setTechs(json);
