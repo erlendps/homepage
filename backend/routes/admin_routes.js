@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 const logger = require("../../logging/logger");
 const db = require("../database/db_functions");
@@ -45,6 +46,15 @@ const project_storage = multer.diskStorage({
 });
 
 const project_upload = multer({storage: project_storage});
+
+/**********************/
+
+// new user
+
+/**********************/
+router.post("/newuser", async (req, res) => {
+  
+});
 
 
 /**********************/

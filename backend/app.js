@@ -6,6 +6,7 @@ const cors = require("cors");
 const projects = require("./routes/project_routes");
 const cookbook = require("./routes/cookbook_routes");
 const admin_site = require("./routes/admin_routes");
+const auth = require("./routes/authentication");
 
 const app = express();
 const port = 3001;
@@ -31,7 +32,11 @@ app.use("/static", express.static("static"));
 app.use("/api/projects", projects);
 app.use("/api/cookbook", cookbook);
 
+// authentication
+app.use("/login", auth);
+
 // admin
 app.use("/api/admin", admin_site);
+
 
 app.listen(port, () => console.log(`Homepage REST API listening on port ${port}`))
