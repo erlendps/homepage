@@ -53,7 +53,26 @@ const project_upload = multer({storage: project_storage});
 
 /**********************/
 router.post("/newuser", async (req, res) => {
-  
+  const username = req.body["username"];
+  if (db.checkIfUserExists(username)) {
+    return res.status(405)
+  }
+  bcrypt.hash(res.body.password, 10)
+    .then((hashedPassword) => {
+      db.createNewUser(username, hashedPassword)
+        .then((created) => {
+          res.status(201).send("User created")
+        })
+        .catch((e) => {
+          res.status(500).send("User not created")
+        })
+    })
+    .catch((e) => {
+      return res.status(500).send({
+        message: "Password not hashed",
+        e
+      })
+    })
 });
 
 
