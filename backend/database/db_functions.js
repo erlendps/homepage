@@ -197,7 +197,7 @@ const createNewUser = async (username, password) => {
   try {
     conn = await db.pool.getConnection();
     let result = await conn.query(`INSERT INTO user (username, password) VALUES (?, ?)`, [username, password]);
-    return !!parseInt(result);
+    return !!parseInt(result["affectedRows"]);
   } catch (err) {
     logger.log("error", err);
     return 401;
@@ -284,4 +284,5 @@ module.exports = {
   deleteProject,
   getAllProjectsShort,
   checkIfUserExists,
+  createNewUser,
 };
