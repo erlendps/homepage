@@ -174,6 +174,38 @@ const checkIfAdmin = async (username) => {
   }
 };
 
+const checkIfUserExists = async (username) => {
+  let conn;
+  try {
+    conn = await db.pool.getConnection();
+    let result = await conn.query(
+      `
+      SELECT EXISTS(
+        SELECT username FROM user WHERE username = ?
+      )`, [username]);
+    return !!parseInt(result);
+  } catch (err) {
+    logger.log("error", err);
+    return 401;
+  } finally {
+    if (conn) conn.end();
+  }
+}
+
+const createNewUser = async (username, password) => {
+  let conn;
+  try {
+    conn = await db.pool.getConnection();
+    let result = await conn.query(`INSERT INTO user (username, password) VALUES (?, ?)`, [username, password]);
+    return !!parseInt(result);
+  } catch (err) {
+    logger.log("error", err);
+    return 401;
+  } finally {
+    if (conn) conn.end();
+  }
+}
+
 const deleteTech = async (techID) => {
   let conn;
   try {
@@ -250,5 +282,6 @@ module.exports = {
   deleteTech,
   deleteRecipe,
   deleteProject,
-  getAllProjectsShort
+  getAllProjectsShort,
+  checkIfUserExists,
 };
