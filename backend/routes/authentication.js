@@ -2,10 +2,13 @@ const express = require("express");
 const router = express.Router();
 const db = require("../database/db_functions");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const multer = require("multer");
+
+const upload = multer();
 
 
-router.post("/", async (req, res) => {
+router.post("/", upload.none(), async (req, res) => {
   const username = req.body["username"];
   if (!await db.checkIfUserExists(username)) {
     return res.status(404).send("Username not found.");
@@ -24,7 +27,7 @@ router.post("/", async (req, res) => {
           userId: username,
         },
         "RANDOM-TOKEN",
-        { expiresIn: "24h" }
+        {expiresIn: "24h"}
       );
 
       return res.status(200).send({
