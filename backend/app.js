@@ -28,12 +28,13 @@ app.use("/static", express.static("static"));
 
 
 // endpoints
+// TODO: return json objects as response
 
 app.use("/api/projects", projects);
 app.use("/api/cookbook", cookbook);
 
 // authentication
-app.use("/login", auth);
+app.use("/api/login", auth);
 
 // admin
 app.use("/api/admin", admin_site);
