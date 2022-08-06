@@ -12,7 +12,6 @@ import Home from "./components/home";
 import Projects from "./components/projects/projects";
 import Cookbook from "./components/cookbook/cookbook";
 import Recipe from "./components/cookbook/recipe";
-import Admin from "./components/admin/admin";
 import "./css/index.css";
 import "./css/general.css";
 import Footer from "./components/footer";
