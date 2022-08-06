@@ -72,3 +72,21 @@
 .delete {
   flex-shrink: 0;
 }
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  max-width: 310px;
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.error {
+  color: #960000;
+}
