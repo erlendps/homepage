@@ -14,23 +14,28 @@ const helmet = require("helmet");
 const app = express();
 const port = 3001;
 
-app.use(helmet);
+app.use(helmet());
 
 // body parsing
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 // parse cookies
 app.use(cookieParser());
 
-app.use(compression);
+app.use(compression());
 
-// TODO: fix cors config
-app.use(cors());
+const corsOptions = { origin: "*" };
+if (process.env.NODE_ENV === "production") {
+  corsOptions["origin"] = "https://pauska.no";
+}
+
+app.use(cors(corsOptions));
 app.use("/static", express.static("static"));
-
 
 // endpoints
 // TODO: return json objects as response
@@ -44,5 +49,6 @@ app.use("/api/login", auth);
 // admin
 app.use("/api/admin", admin_site);
 
-
-app.listen(port, () => console.log(`Homepage REST API listening on port ${port}`))
+app.listen(port, () =>
+  console.log(`Homepage REST API listening on port ${port}`)
+);
