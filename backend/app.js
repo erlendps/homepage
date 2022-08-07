@@ -8,8 +8,13 @@ const cookbook = require("./routes/cookbook_routes");
 const admin_site = require("./routes/admin_routes");
 const auth = require("./routes/authentication");
 
+const compression = require("compression");
+const helmet = require("helmet");
+
 const app = express();
 const port = 3001;
+
+app.use(helmet);
 
 // body parsing
 app.use(bodyParser.json());
@@ -20,7 +25,7 @@ app.use(bodyParser.urlencoded({
 // parse cookies
 app.use(cookieParser());
 
-// authentication
+app.use(compression);
 
 // TODO: fix cors config
 app.use(cors());
