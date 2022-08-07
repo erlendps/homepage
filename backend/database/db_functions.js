@@ -1,6 +1,5 @@
-const db = require("./database.js")
-const logger = require("../../logging/logger")
-
+const db = require("./database.js");
+const logger = require("../logging/logger");
 
 // returns all projects
 const getAllProjects = async () => {
@@ -44,9 +43,7 @@ const getAllTechs = async () => {
   let conn;
   try {
     conn = await db.pool.getConnection();
-    const rows = await conn.query(
-      `SELECT * FROM technology ORDER BY name ASC`
-    );
+    const rows = await conn.query(`SELECT * FROM technology ORDER BY name ASC`);
     return rows;
   } catch (err) {
     logger.log("error", err);
@@ -62,7 +59,9 @@ const newTech = async (technology) => {
   try {
     conn = await db.pool.getConnection();
     await conn.beginTransaction();
-    const res = await conn.query(`INSERT INTO technology (name) VALUES (?)`, [technology.name]);
+    const res = await conn.query(`INSERT INTO technology (name) VALUES (?)`, [
+      technology.name,
+    ]);
     if (res["affectedRows"] === 1) {
       await conn.commit();
       return 201;
@@ -76,7 +75,7 @@ const newTech = async (technology) => {
   } finally {
     if (conn) conn.end();
   }
-}
+};
 
 // adds a new project
 const newProject = async (project, image) => {
@@ -89,13 +88,16 @@ const newProject = async (project, image) => {
       INSERT INTO project (title, description, link, image_path)
       VALUES (?, ?, ?, ?)
       RETURNING projectID
-      `, [project.title, project.description, project.link, image]
+      `,
+      [project.title, project.description, project.link, image]
     );
     const projectID = res[0]["projectID"];
-    project.techsUsed.forEach(async tech => {
-      res = await conn.query(`
+    project.techsUsed.forEach(async (tech) => {
+      res = await conn.query(
+        `
       INSERT INTO projectUsesTech (projectID, techID)
-      VALUES (?, ?)`, [projectID, tech]
+      VALUES (?, ?)`,
+        [projectID, tech]
       );
     });
     await conn.commit();
@@ -114,7 +116,9 @@ const getAllRecepies = async () => {
   let conn;
   try {
     conn = await db.pool.getConnection();
-    let rows = await conn.query(`SELECT recipeID, recipeName, img_src FROM recipe`);
+    let rows = await conn.query(
+      `SELECT recipeID, recipeName, img_src FROM recipe`
+    );
     return rows;
   } catch (err) {
     logger.log("error", err);
@@ -128,7 +132,9 @@ const getRecepie = async (recipeName) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
-    let rows = await conn.query(`SELECT * FROM recipe WHERE recipeName = ?`, [recipeName]);
+    let rows = await conn.query(`SELECT * FROM recipe WHERE recipeName = ?`, [
+      recipeName,
+    ]);
     return rows;
   } catch (err) {
     logger.log("error", err);
@@ -143,7 +149,10 @@ const newRecipe = async (recipeName, recipeJson, img_src) => {
   try {
     conn = await db.pool.getConnection();
     await conn.beginTransaction();
-    let result = await conn.query("INSERT INTO recipe (recipeName, recipeJson, img_src) VALUES (?, ?, ?)", [recipeName, recipeJson, img_src]);
+    let result = await conn.query(
+      "INSERT INTO recipe (recipeName, recipeJson, img_src) VALUES (?, ?, ?)",
+      [recipeName, recipeJson, img_src]
+    );
     if (result["affectedRows"] === 1) {
       conn.commit();
       return 201;
@@ -164,7 +173,10 @@ const checkIfAdmin = async (username) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
-    let result = await conn.query(`SELECT admin_access FROM user WHERE username = ?`, [username]);
+    let result = await conn.query(
+      `SELECT admin_access FROM user WHERE username = ?`,
+      [username]
+    );
     return result;
   } catch (err) {
     logger.log("error", err);
@@ -182,7 +194,9 @@ const checkIfUserExists = async (username) => {
       `
       SELECT EXISTS(
         SELECT username FROM user WHERE username = ?
-      ) AS exist`, [username]);
+      ) AS exist`,
+      [username]
+    );
     return !!result[0]["exist"];
   } catch (err) {
     logger.log("error", err);
@@ -190,13 +204,16 @@ const checkIfUserExists = async (username) => {
   } finally {
     if (conn) conn.end();
   }
-}
+};
 
 const createNewUser = async (username, password) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
-    let result = await conn.query(`INSERT INTO user (username, password) VALUES (?, ?)`, [username, password]);
+    let result = await conn.query(
+      `INSERT INTO user (username, password) VALUES (?, ?)`,
+      [username, password]
+    );
     return !!parseInt(result["affectedRows"]);
   } catch (err) {
     logger.log("error", err);
@@ -204,13 +221,16 @@ const createNewUser = async (username, password) => {
   } finally {
     if (conn) conn.end();
   }
-}
+};
 
 const getHashedPassword = async (username) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
-    let result = await conn.query(`SELECT password FROM user WHERE username = ?`, [username]);
+    let result = await conn.query(
+      `SELECT password FROM user WHERE username = ?`,
+      [username]
+    );
     return result[0].password;
   } catch (err) {
     logger.log("error", err);
@@ -218,14 +238,16 @@ const getHashedPassword = async (username) => {
   } finally {
     if (conn) conn.end();
   }
-}
+};
 
 const deleteTech = async (techID) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
     await conn.beginTransaction();
-    let result = await conn.query(`DELETE FROM technology WHERE techID = ?`, [techID]);
+    let result = await conn.query(`DELETE FROM technology WHERE techID = ?`, [
+      techID,
+    ]);
     if (result["affectedRows"] === 1) {
       conn.commit();
       return 200;
@@ -239,14 +261,16 @@ const deleteTech = async (techID) => {
   } finally {
     if (conn) conn.end();
   }
-}
+};
 
 const deleteRecipe = async (recipeID) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
     await conn.beginTransaction();
-    let result = await conn.query(`DELETE FROM recipe WHERE recipeID = ?`, [recipeID]);
+    let result = await conn.query(`DELETE FROM recipe WHERE recipeID = ?`, [
+      recipeID,
+    ]);
     if (result["affectedRows"] === 1) {
       conn.commit();
       return 200;
@@ -260,14 +284,16 @@ const deleteRecipe = async (recipeID) => {
   } finally {
     if (conn) conn.end();
   }
-}
+};
 
 const deleteProject = async (projectID) => {
   let conn;
   try {
     conn = await db.pool.getConnection();
     await conn.beginTransaction();
-    let result = await conn.query(`DELETE FROM project WHERE projectID = ?`, [projectID]);
+    let result = await conn.query(`DELETE FROM project WHERE projectID = ?`, [
+      projectID,
+    ]);
     if (result["affectedRows"] === 1) {
       conn.commit();
       return 200;
@@ -281,8 +307,7 @@ const deleteProject = async (projectID) => {
   } finally {
     if (conn) conn.end();
   }
-}
-
+};
 
 module.exports = {
   getAllProjects,

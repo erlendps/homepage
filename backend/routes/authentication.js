@@ -7,17 +7,17 @@ const multer = require("multer");
 
 const upload = multer();
 
-
 router.post("/", upload.none(), async (req, res) => {
   const username = req.body["username"];
-  if (!await db.checkIfUserExists(username)) {
+  if (!(await db.checkIfUserExists(username))) {
     return res.status(404).send("Username not found.");
   }
   const hashedPassword = req.body["password"];
   const userPassword = await db.getHashedPassword(username);
-  bcrypt.compare(hashedPassword, userPassword)
+  bcrypt
+    .compare(hashedPassword, userPassword)
     .then((passwordCheck) => {
-      if(!passwordCheck) {
+      if (!passwordCheck) {
         return response.status(400).send("Passwords does not match");
       }
 
@@ -27,7 +27,7 @@ router.post("/", upload.none(), async (req, res) => {
           userId: username,
         },
         "RANDOM-TOKEN",
-        {expiresIn: "24h"}
+        { expiresIn: "24h" }
       );
 
       return res.status(200).send({
@@ -37,7 +37,7 @@ router.post("/", upload.none(), async (req, res) => {
       });
     })
     .catch((e) => {
-      return res.status(400).send("Password does not match.")
+      return res.status(400).send("Password does not match.");
     });
 });
 

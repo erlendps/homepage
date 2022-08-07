@@ -1,8 +1,4 @@
-import {
-  createLogger,
-  format as _format,
-  transports as _transports,
-} from "winston";
+const winston = require("winston");
 
 let path;
 
@@ -12,19 +8,19 @@ if (process.env.NODE_ENV !== "production") {
   path = "/var/log/pauska.no/";
 }
 
-const logger = createLogger({
+const logger = winston.createLogger({
   level: "info",
-  format: _format.simple(),
+  format: winston.format.simple(),
   transports: [
     //
     // - Write all logs with importance level of `error` or less to `error.log`
     // - Write all logs with importance level of `info` or less to `combined.log`
     //
-    new _transports.File({
+    new winston.transports.File({
       filename: path + "error.log",
       level: "error",
     }),
-    new _transports.File({
+    new winston.transports.File({
       filename: path + "combined.log",
     }),
   ],
@@ -36,10 +32,10 @@ const logger = createLogger({
 //
 if (process.env.NODE_ENV !== "production") {
   logger.add(
-    new _transports.Console({
-      format: _format.simple(),
+    new winston.transports.Console({
+      format: winston.format.simple(),
     })
   );
 }
 
-export default logger;
+module.exports = logger;
