@@ -5,7 +5,7 @@ const logger = require("../logging/logger");
 const getAllProjects = async () => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     const rows = await conn.query(`
         SELECT projectID, image_path, title, description, JSON_ARRAYAGG(name) AS techsUsed, link
         FROM project
@@ -25,7 +25,7 @@ const getAllProjects = async () => {
 const getAllProjectsShort = async () => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     const rows = await conn.query(`
         SELECT projectID, image_path, title
         FROM project`);
@@ -42,7 +42,7 @@ const getAllProjectsShort = async () => {
 const getAllTechs = async () => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     const rows = await conn.query(`SELECT * FROM technology ORDER BY name ASC`);
     return rows;
   } catch (err) {
@@ -57,7 +57,7 @@ const getAllTechs = async () => {
 const newTech = async (technology) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     await conn.beginTransaction();
     const res = await conn.query(`INSERT INTO technology (name) VALUES (?)`, [
       technology.name,
@@ -81,7 +81,7 @@ const newTech = async (technology) => {
 const newProject = async (project, image) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     await conn.beginTransaction();
     let res = await conn.query(
       `
@@ -115,7 +115,7 @@ const newProject = async (project, image) => {
 const getAllRecepies = async () => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     let rows = await conn.query(
       `SELECT recipeID, recipeName, img_src FROM recipe`
     );
@@ -131,7 +131,7 @@ const getAllRecepies = async () => {
 const getRecepie = async (recipeName) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     let rows = await conn.query(`SELECT * FROM recipe WHERE recipeName = ?`, [
       recipeName,
     ]);
@@ -147,7 +147,7 @@ const getRecepie = async (recipeName) => {
 const newRecipe = async (recipeName, recipeJson, img_src) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     await conn.beginTransaction();
     let result = await conn.query(
       "INSERT INTO recipe (recipeName, recipeJson, img_src) VALUES (?, ?, ?)",
@@ -172,7 +172,7 @@ const newRecipe = async (recipeName, recipeJson, img_src) => {
 const checkIfAdmin = async (username) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     let result = await conn.query(
       `SELECT admin_access FROM user WHERE username = ?`,
       [username]
@@ -189,7 +189,7 @@ const checkIfAdmin = async (username) => {
 const checkIfUserExists = async (username) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     let result = await conn.query(
       `
       SELECT EXISTS(
@@ -209,7 +209,7 @@ const checkIfUserExists = async (username) => {
 const createNewUser = async (username, password) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     let result = await conn.query(
       `INSERT INTO user (username, password) VALUES (?, ?)`,
       [username, password]
@@ -226,7 +226,7 @@ const createNewUser = async (username, password) => {
 const getHashedPassword = async (username) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     let result = await conn.query(
       `SELECT password FROM user WHERE username = ?`,
       [username]
@@ -243,7 +243,7 @@ const getHashedPassword = async (username) => {
 const deleteTech = async (techID) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     await conn.beginTransaction();
     let result = await conn.query(`DELETE FROM technology WHERE techID = ?`, [
       techID,
@@ -266,7 +266,7 @@ const deleteTech = async (techID) => {
 const deleteRecipe = async (recipeID) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     await conn.beginTransaction();
     let result = await conn.query(`DELETE FROM recipe WHERE recipeID = ?`, [
       recipeID,
@@ -289,7 +289,7 @@ const deleteRecipe = async (recipeID) => {
 const deleteProject = async (projectID) => {
   let conn;
   try {
-    conn = await db.pool.getConnection();
+    conn = await db.getConnection();
     await conn.beginTransaction();
     let result = await conn.query(`DELETE FROM project WHERE projectID = ?`, [
       projectID,
