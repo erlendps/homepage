@@ -1,36 +1,46 @@
-import React, {useEffect, useState} from "react";
-import { Back, Popup, Success, Delete, FileUploader, SearchBar } from "../general";
+import React, { useEffect, useState } from "react";
+import {
+  Back,
+  Popup,
+  Success,
+  Delete,
+  FileUploader,
+  SearchBar,
+} from "../general";
 import "../../css/admin/projects.css";
-import { checkStringIsIncluded } from "../../utils"
+import { checkStringIsIncluded } from "../../utils";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
 const Tech = (props) => {
-  
   const handleClick = () => {
     props.handleClick(props.id, props.techName);
-  }
+  };
 
   return (
-    <div className="single-tech" onClick={handleClick} >
+    <div className="single-tech" onClick={handleClick}>
       {props.techName}
     </div>
-  )
-}
+  );
+};
 
 const Project = (props) => {
   return (
     <div className="single-project">
       <div className="project-content">
-         <h3>{props.title}</h3>
-         <Delete section="projects" id={props.id} notifyParent={props.rerender} />
+        <h3>{props.title}</h3>
+        <Delete
+          section="projects"
+          id={props.id}
+          notifyParent={props.rerender}
+        />
       </div>
       <img src={props.img} alt={props.title + " project"} />
     </div>
-  )
-}
+  );
+};
 
 const ProjectForm = (props) => {
   const [title, setTitle] = useState("");
@@ -44,24 +54,26 @@ const ProjectForm = (props) => {
 
   const handleAddTech = (id, name) => {
     document.getElementById("search-bar").focus();
-    setTechsUsed([...techsUsed, {"techID": id, "name": name}]);
-    props.removeTech(id)
-  }
+    setTechsUsed([...techsUsed, { techID: id, name: name }]);
+    props.removeTech(id);
+  };
 
   const handleDeleteTech = (id, name) => {
-    setTechsUsed(techsUsed.filter((tech) => {
-      return tech.techID !== id;
-    }));
-    props.addTech({"techID": id, "name": name});
-  }
+    setTechsUsed(
+      techsUsed.filter((tech) => {
+        return tech.techID !== id;
+      })
+    );
+    props.addTech({ techID: id, name: name });
+  };
 
   const handleFocus = () => {
     document.getElementById("available-techs").classList.remove("hidden");
-  }
+  };
 
   const handleBlur = () => {
     document.getElementById("available-techs").classList.add("hidden");
-  }
+  };
 
   const cleanup = () => {
     setTitle("");
@@ -72,7 +84,7 @@ const ProjectForm = (props) => {
     setFormError("");
     document.getElementById("file-input").value = null;
     document.getElementById("search-bar").value = "";
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -84,7 +96,7 @@ const ProjectForm = (props) => {
       setFormError("Projects needs technologies");
       return;
     } else if (!description) {
-      setFormError("No description")
+      setFormError("No description");
       return;
     } else if (!link) {
       setFormError("No git link");
@@ -102,53 +114,74 @@ const ProjectForm = (props) => {
     }
     form.append("project_image", image);
 
-    axios.post(process.env.REACT_APP_API_BASE_URL + "admin/newproject", form, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Authorization": `Bearer ${cookies.get("TOKEN")}`
-      },
-    })
+    axios
+      .post(process.env.REACT_APP_API_BASE_URL + "admin/newproject", form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${cookies.get("TOKEN")}`,
+        },
+      })
       .then((res) => {
         props.togglePopup();
         props.rerender();
         cleanup();
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   return (
     <div className="project-form-content">
       <h2>Add new project</h2>
       <form className="project-form" onSubmit={handleSubmit}>
-        <input 
+        <input
           type="text"
-          value={title} 
-          placeholder="Project title" 
+          value={title}
+          placeholder="Project title"
           onChange={(e) => setTitle(e.target.value)}
           className="form-input w-100"
-          required 
+          required
         />
         <div className="techs-group w-100">
           <div className="selected-techs">
             {techsUsed.map((tech) => {
-              return (<Tech key={tech.techID} techName={tech.name} id={tech.techID} handleClick={handleDeleteTech} />)
+              return (
+                <Tech
+                  key={tech.techID}
+                  techName={tech.name}
+                  id={tech.techID}
+                  handleClick={handleDeleteTech}
+                />
+              );
             })}
           </div>
-          <div className="tech-input" tabIndex="0" onFocus={handleFocus} onBlur={handleBlur}>
-            <SearchBar resultContainer={"available-techs"} handleChange={(event) => setQuery(event.target.value)} />
-            <div id="available-techs" className="available-techs hidden" >
-              {
-                props.techs.filter((tech) => {
+          <div
+            className="tech-input"
+            tabIndex="0"
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          >
+            <SearchBar
+              resultContainer={"available-techs"}
+              handleChange={(event) => setQuery(event.target.value)}
+            />
+            <div id="available-techs" className="available-techs hidden">
+              {props.techs
+                .filter((tech) => {
                   if (query === "" || checkStringIsIncluded(query, tech.name)) {
                     return true;
                   }
                   return false;
-                }).map((tech) => {
-                  return (
-                    <Tech key={tech.techID} techName={tech.name} id={tech.techID} handleClick={handleAddTech} />
-                  );
                 })
-              }
+                .map((tech) => {
+                  return (
+                    <Tech
+                      key={tech.techID}
+                      techName={tech.name}
+                      id={tech.techID}
+                      handleClick={handleAddTech}
+                    />
+                  );
+                })}
             </div>
           </div>
         </div>
@@ -158,21 +191,21 @@ const ProjectForm = (props) => {
           className="form-input w-100"
           placeholder="Write a description"
         />
-        <input 
+        <input
           type="text"
-          value={link} 
-          placeholder="Git link" 
+          value={link}
+          placeholder="Git link"
           onChange={(e) => setLink(e.target.value)}
           className="form-input w-100"
-          required 
+          required
         />
         <FileUploader onFileSelect={(file) => setImage(file)} />
         <input type="submit" className="form-submit" value="Add" />
         <p className="form-error">{formError}</p>
       </form>
     </div>
-  )
-}
+  );
+};
 
 const AllProjects = (props) => {
   return (
@@ -187,12 +220,13 @@ const AllProjects = (props) => {
               title={project.title}
               img={project.image_path}
               rerender={props.rerender}
-            />);
+            />
+          );
         })}
       </div>
     </div>
   );
-}
+};
 
 const AdminProjects = () => {
   const [availableTechs, setAvailableTechs] = useState([]);
@@ -205,88 +239,98 @@ const AdminProjects = () => {
   useEffect(() => {
     const fetchTechs = async () => {
       try {
-        let result = await fetch(process.env.REACT_APP_API_BASE_URL + "admin/newproject",
-          {headers: {"Authorization": `Bearer ${cookies.get("TOKEN")}`}});
+        let result = await fetch(
+          process.env.REACT_APP_API_BASE_URL + "admin/newproject",
+          { headers: { Authorization: `Bearer ${cookies.get("TOKEN")}` } }
+        );
         result = await result.json();
         setAvailableTechs(result);
       } catch (error) {
         setError(error);
       }
-    }
-    
+    };
+
     const fetchProjects = async () => {
       try {
-        let result = await fetch(process.env.REACT_APP_API_BASE_URL + "admin/projects",
-          {headers: {"Authorization": `Bearer ${cookies.get("TOKEN")}`}});
+        let result = await fetch(
+          process.env.REACT_APP_API_BASE_URL + "admin/projects",
+          { headers: { Authorization: `Bearer ${cookies.get("TOKEN")}` } }
+        );
         result = await result.json();
         setAllProjects(result);
       } catch (error) {
         setError(error);
       }
-    }
+    };
 
     // make requests run in parallell
     const fetchData = async () => {
       if (!reload) fetchTechs();
       fetchProjects();
       setReload(false);
-    }
+    };
 
     const prepareData = async () => {
       await fetchData();
       setLoaded(true);
-    }
+    };
 
     prepareData();
   }, [reload]);
 
   const togglePopup = () => {
     setPopup(!popup);
-  }
+  };
 
   const forceRerender = () => {
     setReload(true);
-  }
+  };
 
   const removeTech = (id) => {
-    setAvailableTechs(availableTechs.filter((tech) => {
-      return id !== tech.techID;
-    }));
-  }
+    setAvailableTechs(
+      availableTechs.filter((tech) => {
+        return id !== tech.techID;
+      })
+    );
+  };
 
   const addTech = (tech) => {
-    setAvailableTechs([...availableTechs, tech])
-  }
+    setAvailableTechs([...availableTechs, tech]);
+  };
 
   if (!loaded) {
-    return (<p>loading</p>)
+    return <p>loading</p>;
   } else if (error) {
-    return (<p>{error}</p>)
+    return <p>{error}</p>;
   } else {
     return (
       <div className="admin-projects-page">
-        <Back to="/admin"/>
+        <Back to="/admin" />
         <h1 className="mt--p5">Admin Projects Page</h1>
         <div className="admin-projects-content">
           <AllProjects projects={allProjects} rerender={forceRerender} />
           <ProjectForm
             techs={availableTechs}
             togglePopup={togglePopup}
-            rerender={forceRerender} 
+            rerender={forceRerender}
             removeTech={removeTech}
             addTech={addTech}
           />
         </div>
-        {popup && 
-          <Popup onClick={togglePopup}
-            content={<>
-              <Success />
-            </>}
-          handleClose={togglePopup}
-        />}
+        {popup && (
+          <Popup
+            onClick={togglePopup}
+            content={
+              <>
+                <Success />
+              </>
+            }
+            handleClose={togglePopup}
+          />
+        )}
       </div>
     );
   }
-}
+};
 
 export default AdminProjects;

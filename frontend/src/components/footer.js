@@ -1,5 +1,5 @@
-import React from 'react';
-import '../css/footer.css';
+import React from "react";
+import "../css/footer.css";
 
 class Footer extends React.Component {
   render() {
@@ -7,10 +7,13 @@ class Footer extends React.Component {
     return (
       <footer className="footer">
         <p>Laget med Express/MariaDB og React</p>
-        <p>Copyright © {date.getFullYear()} Erlend Paulsen Skaaden. All rights reserved</p>
+        <p>
+          Copyright © {date.getFullYear()} Erlend Paulsen Skaaden. All rights
+          reserved
+        </p>
       </footer>
     );
   }
 }
 
-export default Footer
+export default Footer;

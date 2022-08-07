@@ -1,33 +1,33 @@
-import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import {parseToTitle} from '../../utils';
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { parseToTitle } from "../../utils";
 
 const RecipeCard = (props) => {
   const [error, setError] = useState(null);
   const [image, setImage] = useState("");
-  const [loaded, setLoaded] = useState(false); 
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     // image
     fetch(props.img_link)
-      .then(res => res.blob())
-      .then(blob => {
-        setImage(URL.createObjectURL(blob));
-        setLoaded(true);
-      }, (error) => setError(error));
-  }, [])
+      .then((res) => res.blob())
+      .then(
+        (blob) => {
+          setImage(URL.createObjectURL(blob));
+          setLoaded(true);
+        },
+        (error) => setError(error)
+      );
+  }, [props.img_link]);
 
   if (error) {
-    return (
-      <h1>500: Internal Server Error</h1>
-    );
+    return <h1>500: Internal Server Error</h1>;
   } else if (!loaded) {
-    return (<h1>Loading</h1>)
+    return <h1>Loading</h1>;
   } else {
     let title = parseToTitle(props.recipeName);
     return (
-      <Link to={ `/cookbook/${props.recipeName}` } className="recipe-card-link">
+      <Link to={`/cookbook/${props.recipeName}`} className="recipe-card-link">
         <div className="recipe-card">
           <img src={image} alt={props.recipeName} className="recipe-image" />
           <h2>{title}</h2>
@@ -35,7 +35,6 @@ const RecipeCard = (props) => {
       </Link>
     );
   }
-}
-
+};
 
 export default RecipeCard;

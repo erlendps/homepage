@@ -1,16 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import RecipeCard from './recipeCard';
-import '../../css/cookbook.css';
-
-// TODO: fix searchbar
-const SearchBar = () => {
-  return (
-    <div className="search">
-      <input type="text" placeholder="Søk etter en oppskrift!" />
-    </div>
-  )
-}
-
+import React, { useState, useEffect } from "react";
+import RecipeCard from "./recipeCard";
+import "../../css/cookbook.css";
 
 const Cookbook = () => {
   const [loaded, setLoaded] = useState(false);
@@ -19,14 +9,16 @@ const Cookbook = () => {
 
   useEffect(() => {
     fetch(process.env.REACT_APP_API_BASE_URL + "cookbook")
-      .then(res => res.json())
-      .then((result) => {
-        setCookbook(result);
-        setLoaded(true);
-      },
-      (error) => {
-        setError(error);
-      });
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setCookbook(result);
+          setLoaded(true);
+        },
+        (error) => {
+          setError(error);
+        }
+      );
   }, []);
 
   if (error) {
@@ -55,7 +47,6 @@ const Cookbook = () => {
       </div>
     );
   }
-}
-
+};
 
 export default Cookbook;

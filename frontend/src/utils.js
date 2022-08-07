@@ -13,7 +13,7 @@ const parseToTitle = (title) => {
     }
   }
   return result;
-}
+};
 
 const parseToDbName = (name) => {
   let result = name[0].toLowerCase();
@@ -30,10 +30,10 @@ const parseToDbName = (name) => {
     }
   }
   return result;
-}
+};
 
 const checkStringIsIncluded = (query, target) => {
   return target.toLowerCase().includes(query.toLowerCase());
-}
+};
 
-export {parseToTitle, parseToDbName, checkStringIsIncluded};
+export { parseToTitle, parseToDbName, checkStringIsIncluded };

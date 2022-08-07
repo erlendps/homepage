@@ -5,16 +5,13 @@ import Admin from "./admin/admin";
 
 const cookies = new Cookies();
 
-
 const ProtectedRoutes = () => {
   const token = cookies.get("TOKEN");
   if (token) {
-    return (<Admin />)
+    return <Admin />;
   } else {
-    return (
-      <Navigate to={"/admin/login"} replace />
-    )
+    return <Navigate to={"/admin/login"} replace />;
   }
-}
+};
 
 export default ProtectedRoutes;

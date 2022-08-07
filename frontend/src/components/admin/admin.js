@@ -1,15 +1,11 @@
-import React from 'react';
-import {
-  Route,
-  Routes,
-  Link,
-} from "react-router-dom";
-import Page from '../..';
-import AdminProjects from './admin_projects';
-import AdminCookbook from './admin_recepies';
-import AdminTechs from './admin_techs';
-import '../../css/admin/admin.css';
-import Cookies from 'universal-cookie';
+import React from "react";
+import { Route, Routes, Link } from "react-router-dom";
+import Page from "../..";
+import AdminProjects from "./admin_projects";
+import AdminCookbook from "./admin_recepies";
+import AdminTechs from "./admin_techs";
+import "../../css/admin/admin.css";
+import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
@@ -35,13 +31,17 @@ const AdminLanding = () => {
         </div>
         <button
           className="form-input"
-          onClick={() => {cookies.remove("TOKEN"); window.location.href = "/"}}>
+          onClick={() => {
+            cookies.remove("TOKEN");
+            window.location.href = "/";
+          }}
+        >
           Logg ut
         </button>
       </div>
     </div>
   );
-}
+};
 
 const Admin = () => {
   return (
@@ -82,6 +82,6 @@ const Admin = () => {
       </Routes>
     </div>
   );
-}
+};
 
 export default Admin;
