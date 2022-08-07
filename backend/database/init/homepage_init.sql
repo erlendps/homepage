@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS projectUsesTech (
 CREATE TABLE IF NOT EXISTS recipe (
   recipeID INT AUTO_INCREMENT PRIMARY KEY,
   recipeName VARCHAR(100) UNIQUE NOT NULL,
-  img_src VARCHAR(250)
+  img_src VARCHAR(250),
   recipeJson JSON CHECK (JSON_VALID(recipeJson))
 );
 
