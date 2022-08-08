@@ -49,9 +49,17 @@
   background-color: #C67700;
 }
 
+.all-techs,
+.new-tech {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media screen and (max-width: 700px) {
   .admin-techs-content {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
 }

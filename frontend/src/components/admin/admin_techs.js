@@ -43,7 +43,7 @@ class TechForm extends React.Component {
   render() {
     return (
       <div className="new-tech" onSubmit={this.handleSubmit}>
-        <h2 className="mt--p5">Add a new tech</h2>
+        <h2>Add a new tech</h2>
         <form className="new-tech-form">
           <input
             type="text"
