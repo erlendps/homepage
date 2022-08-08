@@ -4,7 +4,7 @@ module.exports = {
       name: "backend",
       namespace: "pauska",
       script: "./app.js",
-      watch: true,
+      watch: false,
       env: {
         NODE_ENV: "production",
       },
